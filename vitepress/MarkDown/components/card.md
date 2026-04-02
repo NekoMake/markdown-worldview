@@ -7,7 +7,7 @@ Card 组件用于展示角色、势力、物品等的基本信息，适合作为
 ````markdown
 ```card
 name: 艾蕾娜·星语
-avatar: https://via.placeholder.com/150
+avatar: /neko.png
 description: 银月森林的精灵守护者，世代守护着古老的魔法结界
 dictum: "森林记得每一个名字"
 tags: [精灵, 传奇射手, 守序中立]
@@ -18,7 +18,7 @@ tags: [精灵, 传奇射手, 守序中立]
 
 ```card
 name: 艾蕾娜·星语
-avatar: https://via.placeholder.com/150
+avatar: /neko.png
 description: 银月森林的精灵守护者，世代守护着古老的魔法结界
 dictum: "森林记得每一个名字"
 tags: [精灵, 传奇射手, 守序中立]
@@ -31,7 +31,7 @@ tags: [精灵, 传奇射手, 守序中立]
 ````markdown
 ```card
 name: 亚瑟·潘德拉贡
-avatar: https://via.placeholder.com/150
+avatar: /neko.png
 description: 不列颠的传奇国王，拔出石中剑的王者
 dictum: "我是王者，但首先我是骑士"
 tags: [人类, 统治者, 守序善良]
@@ -43,7 +43,7 @@ link: /wiki/arthur
 
 ```card
 name: 亚瑟·潘德拉贡
-avatar: https://via.placeholder.com/150
+avatar: /neko.png
 description: 不列颠的传奇国王，拔出石中剑的王者
 dictum: "我是王者，但首先我是骑士"
 tags: [人类, 统治者, 守序善良]
@@ -71,7 +71,7 @@ name: 神秘旅者
 ````markdown
 ```card
 name: 瓦尔基里·冰霜之心
-avatar: https://via.placeholder.com/150
+avatar: /neko.png
 description: 北境雪山的冰霜女王，掌控着寒冰与风暴的力量。传说她的泪水能冻结时间。
 dictum: "冰封万物，唯心不灭"
 tags: [冰霜巨人, 女王, 混乱中立, 传奇法师]
@@ -83,7 +83,7 @@ link: /characters/valkyrie
 
 ```card
 name: 瓦尔基里·冰霜之心
-avatar: https://via.placeholder.com/150
+avatar: /neko.png
 description: 北境雪山的冰霜女王，掌控着寒冰与风暴的力量。传说她的泪水能冻结时间。
 dictum: "冰封万物，唯心不灭"
 tags: [冰霜巨人, 女王, 混乱中立, 传奇法师]
@@ -131,7 +131,7 @@ Card 组件在移动端会自动调整布局：
 
 ```card
 name: 梅林
-avatar: https://via.placeholder.com/150
+avatar: /neko.png
 description: 亚瑟王的宫廷魔法师，预言家，智者
 dictum: "未来已被书写，但命运仍可改变"
 tags: [半人类, 大法师, 守序中立]
@@ -142,7 +142,7 @@ link: /characters/merlin
 
 ```card
 name: 影刃公会
-avatar: https://via.placeholder.com/150
+avatar: /neko.png
 description: 主大陆最神秘的刺客组织，只为信仰而非金钱服务
 dictum: "黑暗是我们的家，沉默是我们的誓言"
 tags: [刺客组织, 中立邪恶, 隐秘结社]
@@ -153,7 +153,7 @@ link: /factions/shadowblade
 
 ```card
 name: 誓约之剑
-avatar: https://via.placeholder.com/150
+avatar: /neko.png
 description: 传说中斩裂黑夜的神剑，只认可纯洁心灵的持有者
 tags: [神器, 长剑, 传说级]
 link: /items/oath-sword
