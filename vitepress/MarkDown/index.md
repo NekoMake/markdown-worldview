@@ -21,28 +21,28 @@ hero:
       link: https://github.com/your-repo/markdown-worldview
 
 features:
-  - icon: 📝
+  - icon: <span class="material-symbols-rounded m3-icon-feature">code_blocks</span>
     title: 简洁的 YAML 语法
     details: 使用标准 YAML 语法定义组件，无需学习复杂的 DSL，直观易读
-  - icon: 🎨
+  - icon: <span class="material-symbols-rounded m3-icon-feature">widgets</span>
     title: 8 种世界观组件
     details: 卡片、数值面板、物品网格、雷达图、势力图、关系网络、层级架构、时间线
-  - icon: 🔗
+  - icon: <span class="material-symbols-rounded m3-icon-feature">link</span>
     title: 智能导航系统
     details: 通过 onNavigate 回调适配任何路由系统，无缝集成到你的应用
-  - icon: 🌓
+  - icon: <span class="material-symbols-rounded m3-icon-feature">dark_mode</span>
     title: 深色模式支持
     details: 自动适配系统主题，所有组件完美支持深色模式
-  - icon: 📱
+  - icon: <span class="material-symbols-rounded m3-icon-feature">devices</span>
     title: 响应式设计
     details: 移动端和桌面端均有良好体验，组件自动适配屏幕尺寸
-  - icon: 🎯
+  - icon: <span class="material-symbols-rounded m3-icon-feature">code</span>
     title: TypeScript 支持
     details: 完整的类型定义，享受 IDE 的智能提示和类型检查
-  - icon: 🔌
+  - icon: <span class="material-symbols-rounded m3-icon-feature">extension</span>
     title: 易于集成
     details: 支持 VitePress、Obsidian、Nuxt、Next.js 等多种平台
-  - icon: 🎨
+  - icon: <span class="material-symbols-rounded m3-icon-feature">palette</span>
     title: 可定制样式
     details: 基于 CSS 变量，轻松定制颜色、字体、间距等所有样式
 ---

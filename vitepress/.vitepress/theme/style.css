@@ -1,58 +1,91 @@
 /**
- * Customize default theme styling by overriding CSS variables:
- * https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/vars.css
+ * Material 3 Expressive 主题定制
+ * VitePress 文档站样式覆盖
  */
 
-/**
- * Colors
- *
- * Each colors have exact same color scale system with 3 levels of solid
- * colors with different brightness, and 1 soft color.
- *
- * - `XXX-1`: The most solid color used mainly for colored text. It must
- *   satisfy the contrast ratio against when used on top of `XXX-soft`.
- *
- * - `XXX-2`: The color used mainly for hover state of the button.
- *
- * - `XXX-3`: The color for solid background, such as bg color of the button.
- *   It must satisfy the contrast ratio with pure white (#ffffff) text on
- *   top of it.
- *
- * - `XXX-soft`: The color used for subtle background such as custom container
- *   or badges. It must satisfy the contrast ratio when putting `XXX-1` colors
- *   on top of it.
- *
- *   The soft color must be semi transparent alpha channel. This is crucial
- *   because it allows adding multiple "soft" colors on top of each other
- *   to create an accent, such as when having inline code block inside
- *   custom containers.
- *
- * - `default`: The color used purely for subtle indication without any
- *   special meanings attached to it such as bg color for menu hover state.
- *
- * - `brand`: Used for primary brand colors, such as link text, button with
- *   brand theme, etc.
- *
- * - `tip`: Used to indicate useful information. The default theme uses the
- *   brand color for this by default.
- *
- * - `warning`: Used to indicate warning to the users. Used in custom
- *   container, badges, etc.
- *
- * - `danger`: Used to show error, or dangerous message to the users. Used
- *   in custom container, badges, etc.
- * -------------------------------------------------------------------------- */
+/* M3 字体系统 + Material Symbols 图标 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0&display=swap');
+
+/* ========================================================================
+   Material Symbols 图标基础样式
+   ======================================================================== */
+
+.material-symbols-rounded {
+  font-family: 'Material Symbols Rounded';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Feature 卡片里的 Material 图标 - M3 Expressive 填充色容器 */
+.m3-icon-feature {
+  font-size: 28px !important;
+  color: var(--m3-on-primary-container);
+  background: var(--m3-primary-container);
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ========================================================================
+   M3 色彩令牌 (Design Tokens)
+   ======================================================================== */
 
 :root {
+  /* --- M3 核心色彩角色 --- */
+  --m3-primary: #6750A4;
+  --m3-on-primary: #FFFFFF;
+  --m3-primary-container: #EADDFF;
+  --m3-on-primary-container: #21005D;
+  --m3-secondary: #625B71;
+  --m3-on-secondary: #FFFFFF;
+  --m3-secondary-container: #E8DEF8;
+  --m3-on-secondary-container: #1D192B;
+  --m3-tertiary: #7D5260;
+  --m3-on-tertiary: #FFFFFF;
+  --m3-tertiary-container: #FFD8E4;
+  --m3-on-tertiary-container: #31111D;
+  --m3-error: #B3261E;
+  --m3-surface: #FEF7FF;
+  --m3-on-surface: #1D1B20;
+  --m3-surface-variant: #E7E0EC;
+  --m3-on-surface-variant: #49454F;
+  --m3-outline: #79747E;
+  --m3-outline-variant: #CAC4D0;
+  --m3-surface-container-lowest: #FFFFFF;
+  --m3-surface-container-low: #F7F2FA;
+  --m3-surface-container: #F3EDF7;
+  --m3-surface-container-high: #ECE6F0;
+  --m3-surface-container-highest: #E6E0E9;
+  --m3-inverse-surface: #322F35;
+  --m3-inverse-on-surface: #F5EFF7;
+
+  /* --- 映射到 VitePress 变量 --- */
+  --vp-font-family-base: 'Noto Sans SC', system-ui, -apple-system, sans-serif;
+  --vp-font-family-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  --vp-c-brand-1: #6750A4;
+  --vp-c-brand-2: #7965AF;
+  --vp-c-brand-3: #6750A4;
+  --vp-c-brand-soft: rgba(103, 80, 164, 0.12);
+
   --vp-c-default-1: var(--vp-c-gray-1);
   --vp-c-default-2: var(--vp-c-gray-2);
   --vp-c-default-3: var(--vp-c-gray-3);
   --vp-c-default-soft: var(--vp-c-gray-soft);
-
-  --vp-c-brand-1: var(--vp-c-indigo-1);
-  --vp-c-brand-2: var(--vp-c-indigo-2);
-  --vp-c-brand-3: var(--vp-c-indigo-3);
-  --vp-c-brand-soft: var(--vp-c-indigo-soft);
 
   --vp-c-tip-1: var(--vp-c-brand-1);
   --vp-c-tip-2: var(--vp-c-brand-2);
@@ -68,64 +101,403 @@
   --vp-c-danger-2: var(--vp-c-red-2);
   --vp-c-danger-3: var(--vp-c-red-3);
   --vp-c-danger-soft: var(--vp-c-red-soft);
-}
 
-/**
- * Component: Button
- * -------------------------------------------------------------------------- */
-
-:root {
-  --vp-button-brand-border: transparent;
-  --vp-button-brand-text: var(--vp-c-white);
-  --vp-button-brand-bg: var(--vp-c-brand-3);
-  --vp-button-brand-hover-border: transparent;
-  --vp-button-brand-hover-text: var(--vp-c-white);
-  --vp-button-brand-hover-bg: var(--vp-c-brand-2);
-  --vp-button-brand-active-border: transparent;
-  --vp-button-brand-active-text: var(--vp-c-white);
-  --vp-button-brand-active-bg: var(--vp-c-brand-1);
-}
-
-/**
- * Component: Home
- * -------------------------------------------------------------------------- */
-
-:root {
+  /* M3 渐变 */
   --vp-home-hero-name-color: transparent;
-  --vp-home-hero-name-background: -webkit-linear-gradient(
-    120deg,
-    #bd34fe 30%,
-    #41d1ff
-  );
+  --vp-home-hero-name-background: linear-gradient(135deg, #6750A4, #D0BCFF);
+  --vp-home-hero-image-background-image: linear-gradient(135deg, #EADDFF 0%, #FFD8E4 100%);
+  --vp-home-hero-image-filter: blur(68px);
 
-  --vp-home-hero-image-background-image: linear-gradient(
-    -45deg,
-    #bd34fe 50%,
-    #47caff 50%
-  );
-  --vp-home-hero-image-filter: blur(44px);
+  /* M3 按钮 */
+  --vp-button-brand-border: transparent;
+  --vp-button-brand-text: var(--m3-on-primary);
+  --vp-button-brand-bg: var(--m3-primary);
+  --vp-button-brand-hover-border: transparent;
+  --vp-button-brand-hover-text: var(--m3-on-primary);
+  --vp-button-brand-hover-bg: #7965AF;
+  --vp-button-brand-active-border: transparent;
+  --vp-button-brand-active-text: var(--m3-on-primary);
+  --vp-button-brand-active-bg: #5B3F96;
+
+  /* M3 Custom Block */
+  --vp-custom-block-tip-border: transparent;
+  --vp-custom-block-tip-text: var(--vp-c-text-1);
+  --vp-custom-block-tip-bg: var(--m3-primary-container);
+  --vp-custom-block-tip-code-bg: var(--m3-secondary-container);
+
+  /* M3 背景与表面 */
+  --vp-c-bg: var(--m3-surface);
+  --vp-c-bg-soft: var(--m3-surface-container-low);
+  --vp-c-bg-alt: var(--m3-surface-container);
+  --vp-sidebar-bg-color: var(--m3-surface-container-low);
 }
+
+/* ========================================================================
+   深色模式 - M3 Dark Scheme
+   ======================================================================== */
+
+.dark {
+  --m3-primary: #D0BCFF;
+  --m3-on-primary: #381E72;
+  --m3-primary-container: #4F378B;
+  --m3-on-primary-container: #EADDFF;
+  --m3-secondary: #CCC2DC;
+  --m3-on-secondary: #332D41;
+  --m3-secondary-container: #4A4458;
+  --m3-on-secondary-container: #E8DEF8;
+  --m3-tertiary: #EFB8C8;
+  --m3-on-tertiary: #492532;
+  --m3-tertiary-container: #633B48;
+  --m3-on-tertiary-container: #FFD8E4;
+  --m3-surface: #141218;
+  --m3-on-surface: #E6E0E9;
+  --m3-surface-variant: #49454F;
+  --m3-on-surface-variant: #CAC4D0;
+  --m3-outline: #938F99;
+  --m3-outline-variant: #49454F;
+  --m3-surface-container-lowest: #0F0D13;
+  --m3-surface-container-low: #1D1B20;
+  --m3-surface-container: #211F26;
+  --m3-surface-container-high: #2B2930;
+  --m3-surface-container-highest: #36343B;
+  --m3-inverse-surface: #E6E0E9;
+  --m3-inverse-on-surface: #322F35;
+
+  --vp-c-brand-1: #D0BCFF;
+  --vp-c-brand-2: #B69DF8;
+  --vp-c-brand-3: #D0BCFF;
+  --vp-c-brand-soft: rgba(208, 188, 255, 0.12);
+
+  --vp-home-hero-name-background: linear-gradient(135deg, #D0BCFF, #EFB8C8);
+  --vp-home-hero-image-background-image: linear-gradient(135deg, #4F378B 0%, #633B48 100%);
+
+  --vp-button-brand-bg: var(--m3-primary);
+  --vp-button-brand-text: var(--m3-on-primary);
+  --vp-button-brand-hover-bg: #B69DF8;
+  --vp-button-brand-hover-text: var(--m3-on-primary);
+  --vp-button-brand-active-bg: #D0BCFF;
+  --vp-button-brand-active-text: var(--m3-on-primary);
+
+  --vp-custom-block-tip-bg: var(--m3-primary-container);
+  --vp-custom-block-tip-code-bg: var(--m3-secondary-container);
+
+  --vp-c-bg: var(--m3-surface);
+  --vp-c-bg-soft: var(--m3-surface-container-low);
+  --vp-c-bg-alt: var(--m3-surface-container);
+  --vp-sidebar-bg-color: var(--m3-surface-container-low);
+}
+
+/* ========================================================================
+   M3 Expressive 按钮 - 胶囊形态
+   ======================================================================== */
+
+.VPButton {
+  border-radius: 100px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.02em;
+  padding: 10px 24px !important;
+  transition: all 0.3s cubic-bezier(0.2, 0, 0, 1) !important;
+}
+.VPButton:hover {
+  box-shadow: 0 1px 3px 1px rgba(0,0,0,0.15), 0 1px 2px rgba(0,0,0,0.3);
+  transform: translateY(-1px);
+}
+.VPButton:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Alt 按钮 - M3 Tonal / Outlined 风格 */
+.VPButton.alt {
+  background-color: var(--m3-surface-container-high) !important;
+  border: 1px solid var(--m3-outline-variant) !important;
+  color: var(--m3-on-surface) !important;
+}
+.VPButton.alt:hover {
+  background-color: var(--m3-surface-container-highest) !important;
+  border-color: var(--m3-outline) !important;
+}
+
+/* ========================================================================
+   M3 导航栏
+   ======================================================================== */
+
+/* 导航链接 - M3 Indicator 胶囊高亮 */
+.VPNavBarMenuLink.active {
+  position: relative;
+}
+.VPNavBarMenuLink.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 3px;
+  background: var(--m3-primary);
+  border-radius: 3px 3px 0 0;
+}
+
+/* ========================================================================
+   M3 侧边栏
+   ======================================================================== */
+
+/* 侧边栏链接 - M3 Navigation Drawer 风格 */
+.VPSidebar .VPSidebarItem .link {
+  border-radius: 100px !important;
+  padding: 8px 16px !important;
+  margin: 2px 8px !important;
+  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1) !important;
+}
+.VPSidebar .VPSidebarItem .is-active > .item > .link {
+  background: var(--m3-secondary-container) !important;
+  color: var(--m3-on-secondary-container) !important;
+  font-weight: 500;
+}
+.VPSidebar .VPSidebarItem .link:hover {
+  background: rgba(103, 80, 164, 0.08) !important;
+}
+.dark .VPSidebar .VPSidebarItem .link:hover {
+  background: rgba(208, 188, 255, 0.08) !important;
+}
+
+/* ========================================================================
+   M3 Feature 卡片 - Expressive 风格
+   ======================================================================== */
+
+.VPFeature {
+  border-radius: 28px !important;
+  border: none !important;
+  background: var(--m3-surface-container-low) !important;
+  padding: 24px !important;
+  transition: all 0.4s cubic-bezier(0.2, 0, 0, 1) !important;
+  position: relative;
+  overflow: hidden;
+}
+.VPFeature::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 28px;
+  border: 1px solid var(--m3-outline-variant);
+  pointer-events: none;
+  transition: border-color 0.3s cubic-bezier(0.2, 0, 0, 1);
+}
+.VPFeature:hover {
+  background: var(--m3-surface-container) !important;
+  box-shadow: 0 2px 6px 2px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
+}
+.VPFeature:hover::before {
+  border-color: var(--m3-primary);
+}
+
+/* Feature 标题强调 */
+.VPFeature .title {
+  font-weight: 500 !important;
+  color: var(--m3-on-surface) !important;
+}
+.VPFeature .details {
+  color: var(--m3-on-surface-variant) !important;
+}
+
+/* ========================================================================
+   M3 代码块
+   ======================================================================== */
+
+div[class*='language-'] {
+  border-radius: 20px !important;
+  border: 1px solid var(--m3-outline-variant) !important;
+}
+
+/* ========================================================================
+   M3 Custom Block
+   ======================================================================== */
+
+.custom-block {
+  border-radius: 20px !important;
+}
+
+/* ========================================================================
+   M3 页脚分页
+   ======================================================================== */
+
+.pager-link {
+  border-radius: 20px !important;
+  border-color: var(--m3-outline-variant) !important;
+  transition: all 0.3s cubic-bezier(0.2, 0, 0, 1) !important;
+}
+.pager-link:hover {
+  border-color: var(--m3-primary) !important;
+  background: var(--m3-surface-container) !important;
+  box-shadow: 0 1px 3px 1px rgba(0,0,0,0.08);
+}
+
+/* ========================================================================
+   M3 搜索
+   ======================================================================== */
+
+.DocSearch-Button {
+  border-radius: 100px !important;
+}
+
+/* ========================================================================
+   M3 Hero 区域微调
+   ======================================================================== */
 
 @media (min-width: 640px) {
   :root {
-    --vp-home-hero-image-filter: blur(56px);
+    --vp-home-hero-image-filter: blur(72px);
   }
 }
-
 @media (min-width: 960px) {
   :root {
-    --vp-home-hero-image-filter: blur(68px);
+    --vp-home-hero-image-filter: blur(86px);
   }
 }
 
-/**
- * Component: Custom Block
- * -------------------------------------------------------------------------- */
+/* ========================================================================
+   M3 过渡动画 - Material motion
+   ======================================================================== */
 
-:root {
-  --vp-custom-block-tip-border: transparent;
-  --vp-custom-block-tip-text: var(--vp-c-text-1);
-  --vp-custom-block-tip-bg: var(--vp-c-brand-soft);
-  --vp-custom-block-tip-code-bg: var(--vp-c-brand-soft);
+a, .VPNavBarMenuLink {
+  transition: color 0.2s cubic-bezier(0.2, 0, 0, 1) !important;
 }
 
+/* 锚点链接颜色 */
+.vp-doc .header-anchor {
+  color: var(--m3-primary);
+}
+
+/* ========================================================================
+   M3 深色模式 Feature 卡片
+   ======================================================================== */
+
+.dark .VPFeature {
+  background: var(--m3-surface-container) !important;
+}
+.dark .VPFeature:hover {
+  background: var(--m3-surface-container-high) !important;
+}
+.dark .VPFeature::before {
+  border-color: var(--m3-outline-variant);
+}
+.dark .VPFeature:hover::before {
+  border-color: var(--m3-primary);
+}
+
+/* ========================================================================
+   M3 Expressive - markdown-worldview 插件组件覆盖
+   覆盖 --mw-* 变量 + 组件选择器，使其与 M3 主题统一
+   ======================================================================== */
+
+/* --- 亮色模式变量覆盖 --- */
+:root {
+  --mw-primary-color: var(--m3-primary);
+  --mw-bg-color: var(--m3-surface-container-low);
+  --mw-text-color: var(--m3-on-surface);
+  --mw-text-muted: var(--m3-on-surface-variant);
+  --mw-border-color: var(--m3-outline-variant);
+  --mw-radius-sm: 8px;
+  --mw-radius-md: 16px;
+  --mw-radius-lg: 28px;
+  --mw-shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --mw-shadow-md: 0 2px 6px 2px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.1);
+  --mw-transition-base: 300ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* --- 深色模式变量覆盖 --- */
+.dark {
+  --mw-primary-color: var(--m3-primary);
+  --mw-bg-color: var(--m3-surface-container);
+  --mw-text-color: var(--m3-on-surface);
+  --mw-text-muted: var(--m3-on-surface-variant);
+  --mw-border-color: var(--m3-outline-variant);
+}
+
+/* --- Card 组件 M3 Expressive 风格 --- */
+.mw-card {
+  background: var(--m3-surface-container-low) !important;
+  border: none !important;
+  border-radius: 28px !important;
+  padding: 24px !important;
+  box-shadow: none !important;
+  position: relative;
+  overflow: hidden;
+}
+.mw-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 28px;
+  border: 1px solid var(--m3-outline-variant);
+  pointer-events: none;
+  transition: border-color 0.3s cubic-bezier(0.2, 0, 0, 1);
+}
+.mw-card:hover::before {
+  border-color: var(--m3-primary);
+}
+.mw-card.mw-clickable:hover {
+  box-shadow: 0 2px 6px 2px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.1) !important;
+  transform: translateY(-2px);
+}
+
+.dark .mw-card {
+  background: var(--m3-surface-container) !important;
+}
+.dark .mw-card:hover {
+  background: var(--m3-surface-container-high) !important;
+}
+
+/* Avatar - M3 圆角方形 */
+.mw-card-avatar {
+  border-radius: 20px !important;
+  border: none !important;
+  background: var(--m3-surface-container-highest);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Name */
+.mw-card-name {
+  color: var(--m3-on-surface) !important;
+  font-weight: 500 !important;
+  letter-spacing: 0;
+}
+
+/* Description */
+.mw-card-desc {
+  color: var(--m3-on-surface-variant) !important;
+}
+
+/* Dictum - M3 风格引用 */
+.mw-card-dictum {
+  color: var(--m3-on-surface-variant) !important;
+  border-left: 3px solid var(--m3-primary) !important;
+  background: var(--m3-surface-container) !important;
+  border-radius: 0 12px 12px 0 !important;
+  padding: 12px 16px !important;
+}
+.dark .mw-card-dictum {
+  background: var(--m3-surface-container-high) !important;
+}
+
+/* Tags - M3 Assist Chip 风格 */
+.mw-card-tags .mw-badge {
+  background: var(--m3-surface-container-highest) !important;
+  color: var(--m3-on-surface-variant) !important;
+  border-radius: 8px !important;
+  padding: 4px 12px !important;
+  font-size: 0.8rem !important;
+  font-weight: 500 !important;
+  border: 1px solid var(--m3-outline-variant) !important;
+  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+}
+.mw-card-tags .mw-badge:hover {
+  background: var(--m3-secondary-container) !important;
+  color: var(--m3-on-secondary-container) !important;
+  border-color: transparent !important;
+}
+.dark .mw-card-tags .mw-badge {
+  background: var(--m3-surface-container-highest) !important;
+  border-color: var(--m3-outline-variant) !important;
+}
