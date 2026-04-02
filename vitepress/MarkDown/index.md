@@ -53,7 +53,7 @@ features:
 
 ```yaml
 name: 艾蕾娜·星语
-avatar: https://via.placeholder.com/150
+avatar: /neko.png
 description: 银月森林的精灵守护者，世代守护着古老的魔法结界
 dictum: "森林记得每一个名字"
 tags: [精灵, 传奇射手, 守序中立]
@@ -63,7 +63,7 @@ tags: [精灵, 传奇射手, 守序中立]
 
 ```card
 name: 艾蕾娜·星语
-avatar: https://via.placeholder.com/150
+avatar: /neko.png
 description: 银月森林的精灵守护者，世代守护着古老的魔法结界
 dictum: "森林记得每一个名字"
 tags: [精灵, 传奇射手, 守序中立]
