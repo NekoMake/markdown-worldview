@@ -1,0 +1,109 @@
+/**
+ * Numerical Component Styles
+ * 
+ * 数值面板样式 - 展示进度条和数值指标
+ */
+
+/* ========== Numerical Container ========== */
+.mw-numerical {
+  background: var(--mw-bg-color);
+  border: 1px solid var(--mw-border-color);
+  border-radius: var(--mw-radius-md);
+  padding: var(--mw-spacing-lg);
+  margin: var(--mw-spacing-lg) 0;
+  box-shadow: var(--mw-shadow-sm);
+}
+
+/* Error state */
+.mw-numerical.mw-error {
+  border-color: var(--mw-error-color);
+}
+
+.mw-numerical.mw-error strong {
+  color: var(--mw-error-color);
+}
+
+/* ========== Title ========== */
+.mw-numerical-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 0 0 var(--mw-spacing-md) 0;
+  color: var(--mw-text-color);
+}
+
+/* ========== Numerical Item ========== */
+.mw-numerical-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--mw-spacing-sm);
+  align-items: center;
+  margin-bottom: var(--mw-spacing-md);
+}
+
+.mw-numerical-item:last-child {
+  margin-bottom: 0;
+}
+
+/* Icon (optional) */
+.mw-numerical-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+}
+
+/* ========== Content Area ========== */
+.mw-numerical-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mw-spacing-xs);
+}
+
+/* Label */
+.mw-numerical-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--mw-text-color);
+  line-height: 1.2;
+}
+
+/* Progress Bar */
+.mw-numerical-bar {
+  height: 8px;
+  width: 100%;
+  border-radius: var(--mw-radius-sm);
+  background: linear-gradient(
+    to right,
+    var(--mw-primary-color) 0% calc(var(--progress) * 1%),
+    var(--mw-border-color) calc(var(--progress) * 1%) 100%
+  );
+  transition: background var(--mw-transition-base);
+}
+
+/* Value Display */
+.mw-numerical-value {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--mw-text-muted);
+  font-family: var(--mw-font-mono);
+  line-height: 1.2;
+}
+
+/* ========== Responsive Design ========== */
+
+/* Mobile: Stack icon above content if needed */
+@media (max-width: 480px) {
+  .mw-numerical-item {
+    grid-template-columns: 1fr;
+    gap: var(--mw-spacing-xs);
+  }
+  
+  .mw-numerical-icon {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}

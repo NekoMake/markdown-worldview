@@ -1,0 +1,162 @@
+/**
+ * Global CSS Variables for Markdown-Worldview
+ * 
+ * These variables can be overridden in your project to customize the theme.
+ */
+
+:root {
+  /* ========== Base Colors (Light Mode) ========== */
+  --mw-primary-color: #2563eb;      /* Primary blue */
+  --mw-bg-color: #ffffff;           /* Background */
+  --mw-text-color: #1f2937;         /* Primary text */
+  --mw-text-muted: #6b7280;         /* Secondary text */
+  --mw-border-color: #e5e7eb;       /* 1px borders */
+
+  /* ========== Status Colors ========== */
+  --mw-pos-color: #16a34a;          /* Positive: ally, rising, buff */
+  --mw-neg-color: #dc2626;          /* Negative: enemy, falling, debuff */
+  --mw-neu-color: #6b7280;          /* Neutral: stable */
+
+  /* ========== Rarity Colors ========== */
+  --mw-rarity-common: #9ca3af;      /* Common (gray) */
+  --mw-rarity-rare: #3b82f6;        /* Rare (blue) */
+  --mw-rarity-epic: #8b5cf6;        /* Epic (purple) */
+  --mw-rarity-legendary: #f59e0b;   /* Legendary (gold) */
+
+  /* ========== Font System ========== */
+  --mw-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --mw-font-mono: 'Fira Code', 'JetBrains Mono', 'Consolas', monospace;
+
+  /* ========== Spacing ========== */
+  --mw-spacing-2xs: 0.125rem; /* 2px */
+  --mw-spacing-xs: 0.25rem;   /* 4px */
+  --mw-spacing-sm: 0.5rem;    /* 8px */
+  --mw-spacing-md: 1rem;      /* 16px */
+  --mw-spacing-lg: 1.5rem;    /* 24px */
+  --mw-spacing-xl: 2rem;      /* 32px */
+  --mw-spacing-2xl: 2.5rem;   /* 40px */
+  --mw-spacing-3xl: 3rem;     /* 48px */
+
+  /* ========== Interactive States ========== */
+  --mw-hover-color: #1d4ed8;        /* Darker blue for hover */
+  --mw-focus-color: #2563eb;        /* Primary for focus */
+  --mw-active-color: #1e40af;       /* Even darker for active */
+  --mw-focus-ring: 0 0 0 3px rgba(37, 99, 235, 0.2);
+
+  /* ========== Semantic Colors ========== */
+  --mw-success-color: #16a34a;      /* Green */
+  --mw-warning-color: #f59e0b;      /* Yellow/Orange */
+  --mw-error-color: #dc2626;        /* Red */
+  --mw-info-color: #3b82f6;         /* Blue */
+
+  /* ========== Responsive Breakpoints ========== */
+  --mw-breakpoint-mobile: 320px;
+  --mw-breakpoint-tablet: 768px;
+  --mw-breakpoint-desktop: 1024px;
+
+  /* ========== Z-Index Layers ========== */
+  --mw-z-base: 1;
+  --mw-z-dropdown: 100;
+  --mw-z-sticky: 200;
+  --mw-z-tooltip: 300;
+  --mw-z-modal: 400;
+  --mw-z-popover: 500;
+
+  /* ========== Border Radius ========== */
+  --mw-radius-sm: 4px;
+  --mw-radius-md: 8px;
+  --mw-radius-lg: 12px;
+
+  /* ========== Shadows ========== */
+  --mw-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --mw-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --mw-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+
+  /* ========== Transitions ========== */
+  --mw-transition-fast: 150ms ease;
+  --mw-transition-base: 250ms ease;
+  --mw-transition-slow: 350ms ease;
+}
+
+/* ========== Dark Mode ========== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --mw-primary-color: #3b82f6;
+    --mw-bg-color: #1f2937;
+    --mw-text-color: #f3f4f6;
+    --mw-text-muted: #9ca3af;
+    --mw-border-color: #374151;
+
+    --mw-pos-color: #22c55e;
+    --mw-neg-color: #ef4444;
+    --mw-neu-color: #9ca3af;
+
+    --mw-rarity-common: #9ca3af;
+    --mw-rarity-rare: #60a5fa;
+    --mw-rarity-epic: #a78bfa;
+    --mw-rarity-legendary: #fbbf24;
+
+    /* Interactive states for dark mode */
+    --mw-hover-color: #60a5fa;
+    --mw-focus-color: #3b82f6;
+    --mw-active-color: #2563eb;
+    --mw-focus-ring: 0 0 0 3px rgba(59, 130, 246, 0.3);
+
+    /* Semantic colors for dark mode */
+    --mw-success-color: #22c55e;
+    --mw-warning-color: #fbbf24;
+    --mw-error-color: #ef4444;
+    --mw-info-color: #60a5fa;
+
+    --mw-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    --mw-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+    --mw-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* ========== Base Component Styles ========== */
+[class^="mw-"],
+[class*=" mw-"] {
+  font-family: var(--mw-font-sans);
+  color: var(--mw-text-color);
+  box-sizing: border-box;
+}
+
+/* Placeholder styles for Phase 1 (components not yet implemented) */
+.mw-card,
+.mw-numerical,
+.mw-inventory,
+.mw-radar,
+.mw-power,
+.mw-relations,
+.mw-hierarchy,
+.mw-timeline {
+  background: var(--mw-bg-color);
+  border: 1px solid var(--mw-border-color);
+  border-radius: var(--mw-radius-md);
+  padding: var(--mw-spacing-md);
+  margin: var(--mw-spacing-lg) 0;
+}
+
+.mw-card pre,
+.mw-numerical pre,
+.mw-inventory pre,
+.mw-radar pre,
+.mw-power pre,
+.mw-relations pre,
+.mw-hierarchy pre,
+.mw-timeline pre {
+  font-family: var(--mw-font-mono);
+  font-size: 0.875rem;
+  background: rgba(0, 0, 0, 0.05);
+  padding: var(--mw-spacing-sm);
+  border-radius: var(--mw-radius-sm);
+  overflow-x: auto;
+}
+
+/* Error message styles */
+.mw-error {
+  border: 2px solid var(--mw-neg-color) !important;
+  background: rgba(220, 38, 38, 0.1) !important;
+  color: var(--mw-neg-color) !important;
+}

@@ -1,0 +1,76 @@
+/**
+ * Markdown-Worldview Styles Entry Point
+ * 
+ * This file imports all styles in the correct order:
+ * 1. CSS variables (theme)
+ * 2. Common component styles
+ * 3. Layout system
+ * 4. Utility classes
+ * 5. Individual component styles (imported as needed)
+ */
+
+/* ========== Import Order ========== */
+
+/* 1. CSS Variables (Theme System) */
+@import './variables.css';
+
+/* 2. Common Component Styles */
+@import './components.css';
+
+/* 3. Layout System */
+@import './layout.css';
+
+/* 4. Utility Classes */
+@import './utilities.css';
+
+/* 5. Component-Specific Styles */
+/* These will be imported as components are implemented */
+@import './components/card.css';
+@import './components/numerical.css';
+@import './components/inventory.css';
+/* @import './components/radar.css'; */
+/* @import './components/power.css'; */
+/* @import './components/relations.css'; */
+/* @import './components/hierarchy.css'; */
+/* @import './components/timeline.css'; */
+
+/* ========== Global Reset (after imports) ========== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* ========== Base Component Container ========== */
+[class^="mw-"],
+[class*=" mw-"] {
+  font-family: var(--mw-font-sans);
+  color: var(--mw-text-color);
+}
+
+/* All component containers */
+.mw-card,
+.mw-numerical,
+.mw-inventory,
+.mw-radar,
+.mw-power,
+.mw-relations,
+.mw-hierarchy,
+.mw-timeline {
+  background: var(--mw-bg-color);
+  border: 1px solid var(--mw-border-color);
+  border-radius: var(--mw-radius-md);
+  padding: var(--mw-spacing-md);
+  margin: var(--mw-spacing-lg) 0;
+}

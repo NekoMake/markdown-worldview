@@ -1,0 +1,191 @@
+/**
+ * Common Component Styles
+ * 
+ * Reusable base styles for all components
+ */
+
+/* ========== Container ========== */
+.mw-container {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--mw-spacing-md);
+  padding-right: var(--mw-spacing-md);
+}
+
+/* ========== Typography ========== */
+.mw-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 0 0 var(--mw-spacing-md) 0;
+  color: var(--mw-text-color);
+}
+
+.mw-subtitle {
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+  margin: 0 0 var(--mw-spacing-sm) 0;
+  color: var(--mw-text-muted);
+}
+
+/* ========== Links ========== */
+.mw-link {
+  color: var(--mw-primary-color);
+  text-decoration: none;
+  transition: color var(--mw-transition-fast);
+  cursor: pointer;
+}
+
+.mw-link:hover {
+  color: var(--mw-hover-color);
+  text-decoration: underline;
+}
+
+.mw-link:focus {
+  outline: none;
+  box-shadow: var(--mw-focus-ring);
+  border-radius: var(--mw-radius-sm);
+}
+
+.mw-link:active {
+  color: var(--mw-active-color);
+}
+
+.mw-link:visited {
+  color: var(--mw-primary-color);
+}
+
+/* ========== Card Base ========== */
+.mw-card-base {
+  background: var(--mw-bg-color);
+  border: 1px solid var(--mw-border-color);
+  border-radius: var(--mw-radius-md);
+  padding: var(--mw-spacing-md);
+  box-shadow: var(--mw-shadow-sm);
+  transition: 
+    box-shadow var(--mw-transition-base),
+    transform var(--mw-transition-base);
+}
+
+.mw-card-base:hover {
+  box-shadow: var(--mw-shadow-md);
+}
+
+/* Clickable card variant */
+.mw-card-base.mw-clickable {
+  cursor: pointer;
+}
+
+.mw-card-base.mw-clickable:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--mw-shadow-lg);
+}
+
+.mw-card-base.mw-clickable:active {
+  transform: translateY(0);
+  box-shadow: var(--mw-shadow-md);
+}
+
+/* ========== Badges ========== */
+.mw-badge {
+  display: inline-block;
+  padding: var(--mw-spacing-xs) var(--mw-spacing-sm);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1;
+  border-radius: var(--mw-radius-sm);
+  background: var(--mw-border-color);
+  color: var(--mw-text-color);
+  white-space: nowrap;
+}
+
+.mw-badge.mw-badge-primary {
+  background: var(--mw-primary-color);
+  color: white;
+}
+
+.mw-badge.mw-badge-success {
+  background: var(--mw-success-color);
+  color: white;
+}
+
+.mw-badge.mw-badge-warning {
+  background: var(--mw-warning-color);
+  color: white;
+}
+
+.mw-badge.mw-badge-error {
+  background: var(--mw-error-color);
+  color: white;
+}
+
+/* ========== Divider ========== */
+.mw-divider {
+  height: 1px;
+  background: var(--mw-border-color);
+  border: none;
+  margin: var(--mw-spacing-md) 0;
+}
+
+.mw-divider.mw-divider-vertical {
+  width: 1px;
+  height: auto;
+  margin: 0 var(--mw-spacing-md);
+}
+
+/* ========== Button Base ========== */
+.mw-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mw-spacing-xs);
+  padding: var(--mw-spacing-sm) var(--mw-spacing-md);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+  border: 1px solid var(--mw-border-color);
+  border-radius: var(--mw-radius-md);
+  background: var(--mw-bg-color);
+  color: var(--mw-text-color);
+  cursor: pointer;
+  transition: 
+    background var(--mw-transition-fast),
+    border-color var(--mw-transition-fast),
+    transform var(--mw-transition-fast);
+  user-select: none;
+}
+
+.mw-button:hover {
+  background: var(--mw-border-color);
+  border-color: var(--mw-text-muted);
+}
+
+.mw-button:focus {
+  outline: none;
+  box-shadow: var(--mw-focus-ring);
+}
+
+.mw-button:active {
+  transform: scale(0.98);
+}
+
+.mw-button.mw-button-primary {
+  background: var(--mw-primary-color);
+  border-color: var(--mw-primary-color);
+  color: white;
+}
+
+.mw-button.mw-button-primary:hover {
+  background: var(--mw-hover-color);
+  border-color: var(--mw-hover-color);
+}
+
+/* Touch targets: at least 44x44px for accessibility */
+@media (max-width: 768px) {
+  .mw-button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}

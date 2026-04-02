@@ -1,0 +1,158 @@
+/**
+ * Inventory Component Styles
+ * 
+ * 物品/装备网格样式
+ */
+
+/* ========== Inventory Container ========== */
+.mw-inventory {
+  display: grid;
+  grid-template-columns: repeat(var(--columns, 4), 1fr);
+  gap: var(--mw-spacing-md);
+  padding: var(--mw-spacing-lg);
+  margin: var(--mw-spacing-lg) 0;
+  background: var(--mw-bg-color);
+  border: 1px solid var(--mw-border-color);
+  border-radius: var(--mw-radius-md);
+  box-shadow: var(--mw-shadow-sm);
+}
+
+/* Error state */
+.mw-inventory.mw-error {
+  border-color: var(--mw-error-color);
+  display: block;
+}
+
+.mw-inventory.mw-error strong {
+  color: var(--mw-error-color);
+}
+
+/* ========== Inventory Item ========== */
+.mw-inventory-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--mw-spacing-xs);
+  padding: var(--mw-spacing-sm);
+  background: var(--mw-bg-color);
+  border: 2px solid var(--mw-border-color);
+  border-radius: var(--mw-radius-sm);
+  transition: 
+    transform var(--mw-transition-fast),
+    box-shadow var(--mw-transition-fast),
+    border-color var(--mw-transition-fast);
+  min-height: 100px;
+}
+
+/* Clickable variant */
+.mw-inventory-item.mw-clickable {
+  cursor: pointer;
+}
+
+.mw-inventory-item.mw-clickable:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--mw-shadow-md);
+}
+
+.mw-inventory-item.mw-clickable:active {
+  transform: translateY(0);
+}
+
+/* ========== Rarity Colors ========== */
+.mw-inventory-item[data-rarity="common"] {
+  border-color: var(--mw-rarity-common);
+}
+
+.mw-inventory-item[data-rarity="rare"] {
+  border-color: var(--mw-rarity-rare);
+}
+
+.mw-inventory-item[data-rarity="epic"] {
+  border-color: var(--mw-rarity-epic);
+}
+
+.mw-inventory-item[data-rarity="legendary"] {
+  border-color: var(--mw-rarity-legendary);
+}
+
+/* Hover effect for rarity */
+.mw-inventory-item:hover {
+  border-width: 3px;
+}
+
+/* ========== Icon ========== */
+.mw-inventory-icon {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  border-radius: var(--mw-radius-sm);
+}
+
+.mw-inventory-icon-placeholder {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--mw-border-color);
+  border-radius: var(--mw-radius-sm);
+  font-size: 1.5rem;
+  color: var(--mw-text-muted);
+  font-weight: bold;
+}
+
+/* ========== Name ========== */
+.mw-inventory-name {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--mw-text-color);
+  text-align: center;
+  line-height: 1.3;
+  word-break: break-word;
+}
+
+/* ========== Amount Badge ========== */
+.mw-inventory-amount {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: var(--mw-primary-color);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: var(--mw-radius-sm);
+  line-height: 1;
+  font-family: var(--mw-font-mono);
+}
+
+/* ========== Responsive Design ========== */
+
+/* Mobile: 2 columns minimum */
+@media (max-width: 480px) {
+  .mw-inventory {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--mw-spacing-sm);
+  }
+}
+
+/* Tablet: 3 columns for larger grids */
+@media (min-width: 481px) and (max-width: 767px) {
+  .mw-inventory {
+    grid-template-columns: repeat(min(3, var(--columns, 4)), 1fr);
+  }
+}
+
+/* Desktop: Respect columns parameter */
+@media (min-width: 768px) {
+  .mw-inventory-icon,
+  .mw-inventory-icon-placeholder {
+    width: 64px;
+    height: 64px;
+  }
+  
+  .mw-inventory-name {
+    font-size: 1rem;
+  }
+}

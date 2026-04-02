@@ -1,0 +1,219 @@
+/**
+ * Layout System
+ * 
+ * Grid, Flexbox, and responsive layout utilities
+ */
+
+/* ========== CSS Grid ========== */
+.mw-grid {
+  display: grid;
+  gap: var(--mw-spacing-md);
+}
+
+/* Common grid layouts */
+.mw-grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.mw-grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.mw-grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.mw-grid-6 {
+  grid-template-columns: repeat(6, 1fr);
+}
+
+/* Auto-fit grid (responsive) */
+.mw-grid-auto {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+/* Grid gap variants */
+.mw-gap-sm {
+  gap: var(--mw-spacing-sm);
+}
+
+.mw-gap-md {
+  gap: var(--mw-spacing-md);
+}
+
+.mw-gap-lg {
+  gap: var(--mw-spacing-lg);
+}
+
+/* ========== Flexbox ========== */
+.mw-flex {
+  display: flex;
+}
+
+.mw-flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.mw-flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+/* Flex alignment */
+.mw-flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mw-items-start {
+  align-items: flex-start;
+}
+
+.mw-items-center {
+  align-items: center;
+}
+
+.mw-items-end {
+  align-items: flex-end;
+}
+
+.mw-justify-start {
+  justify-content: flex-start;
+}
+
+.mw-justify-center {
+  justify-content: center;
+}
+
+.mw-justify-end {
+  justify-content: flex-end;
+}
+
+.mw-justify-between {
+  justify-content: space-between;
+}
+
+.mw-justify-around {
+  justify-content: space-around;
+}
+
+/* Flex wrap */
+.mw-flex-wrap {
+  flex-wrap: wrap;
+}
+
+.mw-flex-nowrap {
+  flex-wrap: nowrap;
+}
+
+/* Flex grow/shrink */
+.mw-flex-1 {
+  flex: 1;
+}
+
+.mw-flex-auto {
+  flex: auto;
+}
+
+.mw-flex-none {
+  flex: none;
+}
+
+/* ========== Stack Layout ========== */
+/* Vertical stack with consistent spacing */
+.mw-stack {
+  display: flex;
+  flex-direction: column;
+}
+
+.mw-stack > * + * {
+  margin-top: var(--mw-spacing-md);
+}
+
+.mw-stack.mw-stack-sm > * + * {
+  margin-top: var(--mw-spacing-sm);
+}
+
+.mw-stack.mw-stack-lg > * + * {
+  margin-top: var(--mw-spacing-lg);
+}
+
+/* ========== Cluster Layout ========== */
+/* Horizontal layout with wrapping */
+.mw-cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--mw-spacing-md);
+  align-items: center;
+}
+
+.mw-cluster.mw-cluster-sm {
+  gap: var(--mw-spacing-sm);
+}
+
+.mw-cluster.mw-cluster-lg {
+  gap: var(--mw-spacing-lg);
+}
+
+/* ========== Responsive Utilities ========== */
+
+/* Mobile-first: Hide on mobile */
+@media (max-width: 767px) {
+  .mw-hide-mobile {
+    display: none !important;
+  }
+}
+
+/* Tablet: 768px - 1023px */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .mw-hide-tablet {
+    display: none !important;
+  }
+}
+
+/* Desktop: 1024px+ */
+@media (min-width: 1024px) {
+  .mw-hide-desktop {
+    display: none !important;
+  }
+}
+
+/* Show only on specific breakpoints */
+@media (max-width: 767px) {
+  .mw-show-mobile {
+    display: block !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .mw-show-tablet {
+    display: block !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .mw-show-desktop {
+    display: block !important;
+  }
+}
+
+/* Responsive grid adjustments */
+@media (max-width: 767px) {
+  .mw-grid-3,
+  .mw-grid-4,
+  .mw-grid-6 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .mw-grid-6 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .mw-grid-4 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
