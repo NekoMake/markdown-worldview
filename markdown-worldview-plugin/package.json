@@ -1,6 +1,6 @@
 {
   "name": "markdown-worldview",
-  "version": "0.1.0",
+  "version": "0.1.0-alpha.0",
   "description": "A markdown-it plugin for rendering interactive worldview components with YAML syntax",
   "type": "module",
   "main": "./dist/markdown-worldview.umd.cjs",
@@ -8,9 +8,9 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/markdown-worldview.js",
-      "require": "./dist/markdown-worldview.umd.cjs",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/markdown-worldview.umd.cjs"
     },
     "./style.css": "./dist/style.css"
   },
@@ -38,7 +38,7 @@
     "yaml",
     "components"
   ],
-  "author": "",
+  "author": "NekoMake",
   "license": "MIT",
   "peerDependencies": {
     "markdown-it": "^14.0.0"
@@ -58,15 +58,16 @@
     "vis-timeline": "^7.7.3",
     "vite": "^6.0.11",
     "vite-plugin-dts": "^4.3.0",
-    "vitepress": "^1.6.2",
-    "vitest": "^2.1.8"
+    "vitepress": "^1.6.4",
+    "vitest": "^2.1.8",
+    "vue": "^3.5.31"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/markdown-worldview.git"
+    "url": "https://github.com/NekoMake/markdown-worldview.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/markdown-worldview/issues"
+    "url": "https://github.com/NekoMake/markdown-worldview/issues"
   },
-  "homepage": "https://github.com/yourusername/markdown-worldview#readme"
+  "homepage": "https://github.com/NekoMake/markdown-worldview#readme"
 }

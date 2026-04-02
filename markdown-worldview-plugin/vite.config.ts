@@ -29,7 +29,10 @@ export default defineConfig({
           'js-yaml': 'jsyaml',
         },
         assetFileNames: (assetInfo) => {
-          if (assetInfo.name === 'style.css') return 'style.css';
+          // 确保 CSS 文件始终命名为 style.css
+          if (assetInfo.name && assetInfo.name.endsWith('.css')) {
+            return 'style.css';
+          }
           return assetInfo.name || 'asset';
         },
       },

@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "docs:dev": "vitepress dev MarkDown",
+    "docs:build": "vitepress build MarkDown",
+    "docs:preview": "vitepress preview MarkDown"
+  },
+  "dependencies": {
+    "markdown-it": "^14.1.0",
+    "markdown-worldview": "file:../markdown-worldview-plugin/dist",
+    "vitepress": "^2.0.0-alpha.17",
+    "vue": "^3.5.31"
+  }
+}
