@@ -74,6 +74,19 @@
 | `--mw-inventory-columns` | 物品网格列数 | 4 | 大屏用 `6`，手机用 `2` |
 | `--mw-inventory-icon-size` | 物品图标大小 | 48px | 看不清就用 `64px` |
 
+### ⚠️ 错误提示样式
+
+| 配置项 | 说明 | 默认 |
+|--------|------|------|
+| `--mw-error-border` | 开发模式错误边框色 | `#dc2626`（红色） |
+| `--mw-error-bg` | 开发模式错误背景色 | `#fee`（浅红） |
+| `--mw-error-text` | 开发模式错误文字色 | `#dc2626`（红色） |
+| `--mw-info-border` | 生产模式提示边框色 | `#d1d5db`（淡灰） |
+| `--mw-info-bg` | 生产模式提示背景色 | `#f9fafb`（浅灰） |
+| `--mw-info-text` | 生产模式提示文字色 | `#6b7280`（中灰） |
+
+> 💡 **提示**：关于错误处理的详细说明，请参考 [错误处理指南](/guide/error-handling)
+
 
 ## 🎨 高级：CSS类名
 
@@ -256,6 +269,7 @@ A: 目前不支持，请用CSS变量。
 ## 💬 更多帮助
 
 - 📚 [组件文档](/components/card)
-- 🔍 完整变量列表：源码 `variables.css`
+- �️ [错误处理指南](/guide/error-handling) - 遇到问题时查看
+- �🔍 完整变量列表：源码 `variables.css`
 - 💡 [GitHub仓库](https://github.com/your-repo)
 - ❤️ 分享你的主题到Issues

@@ -12,6 +12,7 @@ export default defineConfig({
   markdown: {
     config: (md) => {
       md.use(markdownWorldviewPlugin, {
+        debug: true,  // 启用调试模式
         onNavigate: (event) => {
           // VitePress 中的链接跳转处理
           if (typeof window !== 'undefined') {
@@ -40,7 +41,8 @@ export default defineConfig({
           items: [
             { text: '快速开始', link: '/guide/quickstart' },
             { text: '安装与配置', link: '/guide/installation' },
-            { text: '主题定制', link: '/guide/theming' }
+            { text: '主题定制', link: '/guide/theming' },
+            { text: '错误处理', link: '/guide/error-handling' }
           ]
         }
       ],
