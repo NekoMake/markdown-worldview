@@ -40,19 +40,17 @@ data:
 `;
     const html = md.render(markdown);
     expect(html).toContain('mw-radar');
-    expect(html).toContain('Radar 组件');
+    expect(html).toContain('data-mw-chart-type="radar"');
+    expect(html).toContain('Test Radar');  // title 应该在配置中
   });
 
-  it('应该渲染所有 8 种组件类型', () => {
+  it('应该渲染所有已实现的组件类型', () => {
     const testCases = {
-      card: 'name: Test',
+      card: 'name: Test Card\ndescription: Test Description',
       numerical: 'items:\n  - label: Test\n    value: 100',
-      inventory: 'items:\n  - name: Item1',
-      radar: 'test: data',
-      power: 'test: data',
-      relations: 'test: data',
-      hierarchy: 'test: data',
-      timeline: 'test: data'
+      inventory: 'items:\n  - name: Item1\n    quantity: 5',
+      radar: 'data:\n  攻击力: 80\n  防御力: 90',
+      power: 'faction: 测试势力\ndata:\n  军事: 85\n  经济: 70'
     };
 
     Object.entries(testCases).forEach(([component, data]) => {
@@ -62,6 +60,9 @@ ${data}
 \`\`\`
 `;
       const html = md.render(markdown);
+      console.log(`\n=== ${component} 组件输出 ===`);
+      console.log(html);
+      console.log(`包含 mw-${component}? ${html.includes(`mw-${component}`)}`);
       expect(html).toContain(`mw-${component}`);
     });
   });

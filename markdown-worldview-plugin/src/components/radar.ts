@@ -65,7 +65,7 @@ export function renderRadar(content: string, options: MarkdownWorldviewOptions):
     // 客户端会扫描 [data-mw-chart-type] 元素并初始化图表
     const html = `
 <div 
-  class="mw-chart mw-chart-radar"
+  class="mw-radar mw-chart mw-chart-radar"
   data-mw-chart-type="radar"
   data-mw-chart-config="${configJsonEscaped}"
   style="height: 400px; width: 100%;"
