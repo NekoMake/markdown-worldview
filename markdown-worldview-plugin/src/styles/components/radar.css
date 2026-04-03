@@ -1,0 +1,33 @@
+/**
+ * Radar 图表组件样式
+ * 
+ * 包含图表容器和加载占位符的样式
+ */
+
+/* Radar 图表容器 */
+.mw-chart-radar {
+  background: var(--mw-bg-color);
+  border: 1px solid var(--mw-border-color);
+  border-radius: var(--mw-radius-md);
+  padding: var(--mw-space-md);
+  margin: var(--mw-space-lg) 0;
+}
+
+/* 通用图表加载占位符 */
+.mw-chart-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--mw-text-muted);
+  font-size: 0.9rem;
+  font-family: var(--mw-font-sans);
+}
+
+/* 深色模式适配 */
+@media (prefers-color-scheme: dark) {
+  .mw-chart-radar {
+    background: var(--mw-bg-color);
+    border-color: var(--mw-border-color);
+  }
+}

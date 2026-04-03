@@ -126,9 +126,9 @@ markdown-worldview-plugin/
 
 ## 🎯 当前开发进度追踪
 
-**最新完成阶段**：Phase 1 - 项目初始化和基础架构
+**最新完成阶段**：Phase 4 - 图表组件实现 (ECharts)
 **当前正在进行**：待定
-**下一阶段**：Phase 2 - CSS 主题系统
+**下一阶段**：Phase 5 - 图形组件（Relations, Hierarchy, Timeline）
 
 > 💡 **提示**：每次完成一个 Phase，请更新这个部分！
 

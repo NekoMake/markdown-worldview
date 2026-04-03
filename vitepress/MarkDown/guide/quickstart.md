@@ -32,7 +32,7 @@ const html = md.render('你的 markdown 内容')
 
 ### 在 VitePress 中使用
 
-在 `.vitepress/config.ts` 中配置：
+**步骤 1：配置 markdown-it 插件** - 在 `.vitepress/config.ts` 中：
 
 ```typescript
 import { defineConfig } from 'vitepress'
@@ -42,9 +42,12 @@ export default defineConfig({
   markdown: {
     config: (md) => {
       md.use(markdownWorldviewPlugin, {
+        debug: true,
         onNavigate: (event) => {
           // VitePress 导航逻辑
-          window.location.href = event.path
+          if (typeof window !== 'undefined') {
+            window.location.href = event.path
+          }
         }
       })
     }
@@ -52,15 +55,51 @@ export default defineConfig({
 })
 ```
 
-在 `.vitepress/theme/index.ts` 中导入样式：
+**步骤 2：创建自定义 Layout** - 创建 `.vitepress/theme/Layout.vue`：
+
+```vue
+<script setup lang="ts">
+import { onMounted, onUnmounted, watch } from 'vue'
+import { useRoute } from 'vitepress'
+import DefaultTheme from 'vitepress/theme'
+import { initMarkdownWorldview } from 'markdown-worldview/client'
+
+const { Layout } = DefaultTheme
+const route = useRoute()
+
+let cleanup: (() => void) | null = null
+
+onMounted(async () => {
+  cleanup = await initMarkdownWorldview({ debug: true })
+})
+
+onUnmounted(() => {
+  if (cleanup) cleanup()
+})
+
+watch(() => route.path, async () => {
+  if (cleanup) cleanup()
+  cleanup = await initMarkdownWorldview({ debug: true })
+})
+</script>
+
+<template>
+  <Layout />
+</template>
+```
+
+**步骤 3：注册主题** - 在 `.vitepress/theme/index.ts` 中：
 
 ```typescript
+import type { Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
+import Layout from './Layout.vue'
 import 'markdown-worldview/style.css'
 
 export default {
-  extends: DefaultTheme
-}
+  extends: DefaultTheme,
+  Layout
+} satisfies Theme
 ```
 
 ## 组件语法

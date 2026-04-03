@@ -13,21 +13,28 @@ export default defineConfig({
   ],
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/index.ts'),
+      entry: {
+        index: resolve(__dirname, 'src/index.ts'),
+        client: resolve(__dirname, 'src/client/init.ts'), // Phase 4: 客户端入口
+      },
       name: 'MarkdownWorldview',
-      formats: ['es', 'umd'],
-      fileName: (format) => {
-        if (format === 'umd') return 'markdown-worldview.umd.cjs';
-        return 'markdown-worldview.js';
+      formats: ['es'], // 多入口点只能使用 ES 格式
+      fileName: (format, entryName) => {
+        // 所有文件都生成 ESM 格式
+        return `${entryName}.js`;
       },
     },
     rollupOptions: {
-      external: ['markdown-it', 'js-yaml'],
+      external: [
+        'markdown-it',
+        'js-yaml',
+        'echarts',
+        'echarts/core',
+        'echarts/charts',
+        'echarts/components',
+        'echarts/renderers',
+      ],
       output: {
-        globals: {
-          'markdown-it': 'markdownit',
-          'js-yaml': 'jsyaml',
-        },
         assetFileNames: (assetInfo) => {
           // 确保 CSS 文件始终命名为 style.css
           if (assetInfo.name && assetInfo.name.endsWith('.css')) {

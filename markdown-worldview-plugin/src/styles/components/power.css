@@ -1,0 +1,154 @@
+/**
+ * Power 势力综测面板组件样式
+ * 
+ * 混合布局：纯 CSS（头部、趋势）+ ECharts（柱状图）
+ */
+
+/* Power 组件容器 */
+.mw-power {
+  border: 1px solid var(--mw-border-color);
+  border-radius: var(--mw-radius-md);
+  overflow: hidden;
+  margin: var(--mw-space-lg) 0;
+  background: var(--mw-bg-color);
+}
+
+/* === 头部信息 === */
+.mw-power-header {
+  padding: var(--mw-space-lg);
+  background: var(--mw-bg-color);
+  border-bottom: 1px solid var(--mw-border-color);
+}
+
+.mw-power-faction {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 var(--mw-space-sm) 0;
+  color: var(--mw-text-color);
+  font-family: var(--mw-font-sans);
+}
+
+.mw-power-status {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--mw-radius-sm);
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: var(--mw-space-sm);
+  border: 1px solid currentColor;
+}
+
+/* 状态颜色映射 */
+.mw-status-pos {
+  color: var(--mw-pos-color);
+  background: rgba(22, 163, 74, 0.1);
+}
+
+.mw-status-neg {
+  color: var(--mw-neg-color);
+  background: rgba(220, 38, 38, 0.1);
+}
+
+.mw-status-neu {
+  color: var(--mw-neu-color);
+  background: rgba(107, 114, 128, 0.1);
+}
+
+.mw-power-leader {
+  margin: var(--mw-space-sm) 0 0;
+  color: var(--mw-text-muted);
+  font-size: 0.9rem;
+}
+
+/* === ECharts 图表容器 === */
+.mw-chart-power {
+  background: var(--mw-bg-color);
+  padding: var(--mw-space-md);
+}
+
+/* === 趋势指示器 === */
+.mw-power-trend {
+  display: flex;
+  gap: var(--mw-space-lg);
+  padding: var(--mw-space-lg);
+  background: var(--mw-bg-color);
+  border-top: 1px solid var(--mw-border-color);
+  flex-wrap: wrap;
+}
+
+.mw-trend-item {
+  display: flex;
+  align-items: center;
+  gap: var(--mw-space-xs);
+  font-size: 0.9rem;
+}
+
+.mw-trend-label {
+  color: var(--mw-text-color);
+  font-weight: 500;
+}
+
+.mw-trend-icon {
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* 趋势图标颜色 */
+.mw-trend-rising {
+  color: var(--mw-pos-color);
+}
+
+.mw-trend-stable {
+  color: var(--mw-neu-color);
+}
+
+.mw-trend-falling {
+  color: var(--mw-neg-color);
+}
+
+/* === 响应式布局 === */
+@media (max-width: 640px) {
+  .mw-power-header {
+    padding: var(--mw-space-md);
+  }
+  
+  .mw-power-faction {
+    font-size: 1.1rem;
+  }
+  
+  .mw-power-trend {
+    gap: var(--mw-space-md);
+    padding: var(--mw-space-md);
+  }
+  
+  .mw-trend-item {
+    font-size: 0.85rem;
+  }
+}
+
+/* 深色模式适配 */
+@media (prefers-color-scheme: dark) {
+  .mw-power {
+    background: var(--mw-bg-color);
+    border-color: var(--mw-border-color);
+  }
+  
+  .mw-power-header {
+    background: var(--mw-bg-color);
+    border-bottom-color: var(--mw-border-color);
+  }
+  
+  .mw-chart-power {
+    background: var(--mw-bg-color);
+  }
+  
+  .mw-power-trend {
+    background: var(--mw-bg-color);
+    border-top-color: var(--mw-border-color);
+  }
+}

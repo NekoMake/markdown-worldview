@@ -13,6 +13,10 @@ import { renderCard } from './card';
 import { renderNumerical } from './numerical';
 import { renderInventory } from './inventory';
 
+// Phase 4 组件（ECharts）
+import { renderRadar } from './radar';
+import { renderPower } from './power';
+
 /**
  * 组件渲染器函数类型
  */
@@ -127,22 +131,9 @@ componentRegistry.register('card', renderCard);
 componentRegistry.register('numerical', renderNumerical);
 componentRegistry.register('inventory', renderInventory);
 
-// Phase 4 组件（ECharts）
-componentRegistry.register('radar', (content, options) => {
-  const data = parseYAML(content, 'radar');
-  return `<div class="${options.classPrefix}-radar">
-    <p>🚧 Radar 组件 (Phase 4)</p>
-    <pre>${JSON.stringify(data, null, 2)}</pre>
-  </div>`;
-});
-
-componentRegistry.register('power', (content, options) => {
-  const data = parseYAML(content, 'power');
-  return `<div class="${options.classPrefix}-power">
-    <p>🚧 Power 组件 (Phase 4)</p>
-    <pre>${JSON.stringify(data, null, 2)}</pre>
-  </div>`;
-});
+// Phase 4 组件（ECharts）- 已实现
+componentRegistry.register('radar', renderRadar);
+componentRegistry.register('power', renderPower);
 
 // Phase 5 组件（Mermaid & Vis-timeline）
 componentRegistry.register('relations', (content, options) => {

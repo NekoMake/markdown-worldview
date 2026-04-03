@@ -5,6 +5,7 @@
     "docs:preview": "vitepress preview"
   },
   "dependencies": {
+    "echarts": "^6.0.0",
     "markdown-it": "^14.1.0",
     "markdown-worldview": "file:../markdown-worldview-plugin",
     "vitepress": "^2.0.0-alpha.17",

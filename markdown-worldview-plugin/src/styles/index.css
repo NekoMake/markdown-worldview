@@ -28,8 +28,8 @@
 @import './components/card.css';
 @import './components/numerical.css';
 @import './components/inventory.css';
-/* @import './components/radar.css'; */
-/* @import './components/power.css'; */
+@import './components/radar.css';
+@import './components/power.css';
 /* @import './components/relations.css'; */
 /* @import './components/hierarchy.css'; */
 /* @import './components/timeline.css'; */
