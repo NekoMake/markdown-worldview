@@ -1,48 +1,19 @@
 /**
  * Numerical Component Styles
  * 
- * 数值面板样式 - 展示进度条和数值指标
+ * 数值面板样式 - 水平卡片布局
  */
 
-/* ========== Numerical Container - M3 Expressive ========== */
+/* ========== Numerical Container - 水平卡片容器 ========== */
 .mw-numerical {
-  background: var(--mw-surface-container-low);
-  border: none;
-  border-radius: var(--mw-radius-lg);
-  padding: var(--mw-spacing-lg);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--mw-spacing-md);
   margin: var(--mw-spacing-lg) 0;
-  box-shadow: none;
-  position: relative;
-  overflow: hidden;
-  transition: background var(--mw-transition-base);
-}
-
-/* M3 边框效果 */
-.mw-numerical::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: var(--mw-radius-lg);
-  border: 1px solid var(--mw-outline-variant);
-  pointer-events: none;
-  transition: border-color var(--mw-transition-base);
-}
-
-.mw-numerical:hover {
-  background: var(--mw-surface-container);
-}
-
-.mw-numerical:hover::before {
-  border-color: var(--mw-primary-color);
-}
-
-/* Error state */
-.mw-numerical.mw-error {
-  border-color: var(--mw-error-color);
-}
-
-.mw-numerical.mw-error strong {
-  color: var(--mw-error-color);
+  padding: 0;
+  background: transparent;
+  border: none;
+  align-items: flex-start;
 }
 
 /* ========== Title ========== */
@@ -50,43 +21,158 @@
   font-size: 1.25rem;
   font-weight: 600;
   line-height: 1.4;
-  margin: 0 0 var(--mw-spacing-md) 0;
+  margin: 0 0 var(--mw-spacing-sm) 0;
   color: var(--mw-text-color);
+  flex-basis: 100%;
+  width: 100%;
 }
 
-/* ========== Numerical Item ========== */
+/* Error state */
+.mw-numerical.mw-error {
+  background: var(--mw-surface-container-low);
+  border: 1px solid var(--mw-error-color);
+  border-radius: var(--mw-radius-lg);
+  padding: var(--mw-spacing-lg);
+}
+
+.mw-numerical.mw-error strong {
+  color: var(--mw-error-color);
+}
+
+/* ========== Numerical Item - 基础卡片样式 ========== */
 .mw-numerical-item {
+  background: var(--mw-surface-container-low);
+  border: 1px solid var(--mw-outline-variant);
+  border-radius: var(--mw-radius-lg);
+  padding: var(--mw-spacing-md);
+  box-shadow: var(--mw-shadow-sm);
+  
+  /* 交互动画 */
+  transition: 
+    transform var(--mw-transition-base),
+    box-shadow var(--mw-transition-base),
+    border-color var(--mw-transition-base),
+    background var(--mw-transition-base);
+  cursor: default;
+}
+
+/* 悬浮效果 */
+.mw-numerical-item:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--mw-shadow-lg);
+  border-color: var(--mw-primary-color);
+  background: var(--mw-surface-container);
+}
+
+.mw-numerical-item:active {
+  transform: translateY(-2px);
+  box-shadow: var(--mw-shadow-md);
+}
+
+/* ========== 有进度条的项（横向布局）========== */
+.mw-numerical-item--progress {
+  flex: 1 1 calc(33.333% - var(--mw-spacing-md));
+  min-width: 200px;
+  
+  /* 内部布局：左边图标，右边内容 */
   display: grid;
   grid-template-columns: auto 1fr;
   gap: var(--mw-spacing-sm);
   align-items: center;
-  margin-bottom: var(--mw-spacing-md);
 }
 
-.mw-numerical-item:last-child {
-  margin-bottom: 0;
+/* ========== 无进度条的项（正方形布局）========== */
+.mw-numerical-item--simple {
+  /* 正方形卡片 - 固定尺寸，不拉伸 */
+  flex: 0 0 150px;
+  width: 150px;
+  height: 150px;
+  min-width: 150px;
+  max-width: 150px;
+  position: relative;
+  
+  /* 垂直居中布局 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mw-spacing-xs);
+  text-align: center;
 }
+
+/* 正方形卡片的图标 */
+.mw-numerical-item--simple .mw-numerical-icon {
+  position: absolute;
+  top: var(--mw-spacing-sm);
+  right: var(--mw-spacing-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  font-size: 16px;
+  background: var(--mw-primary-container);
+  color: var(--mw-on-primary-container);
+  border-radius: 8px;
+  transition: transform var(--mw-transition-fast);
+}
+
+/* 正方形卡片的大数字 */
+.mw-numerical-value-large {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--mw-primary-color);
+  font-family: var(--mw-font-mono);
+  transition: transform var(--mw-transition-fast), color var(--mw-transition-fast);
+}
+
+/* 正方形卡片的标签 */
+.mw-numerical-item--simple .mw-numerical-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--mw-text-muted);
+  margin-top: var(--mw-spacing-xs);
+}
+
+/* 图标悬浮动画 */
+.mw-numerical-item--simple:hover .mw-numerical-icon {
+  transform: scale(1.15) rotate(10deg);
+}
+
+.mw-numerical-item--simple:hover .mw-numerical-value-large {
+  color: var(--mw-hover-color);
+  transform: scale(1.05);
+}
+
+/* ========== 有进度条项的子元素 ========== */
 
 /* Icon (optional) - M3 图标容器 */
-.mw-numerical-icon {
-  font-size: 20px;
+.mw-numerical-item--progress .mw-numerical-icon {
+  font-size: 24px;
   line-height: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   background: var(--mw-primary-container);
   color: var(--mw-on-primary-container);
   border-radius: 12px;
   flex-shrink: 0;
+  transition: transform var(--mw-transition-fast);
 }
 
-/* ========== Content Area ========== */
+.mw-numerical-item--progress:hover .mw-numerical-icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* Content Area */
 .mw-numerical-content {
   display: flex;
   flex-direction: column;
-  gap: var(--mw-spacing-xs);
+  gap: 6px;
+  min-width: 0;
 }
 
 /* Label */
@@ -95,20 +181,38 @@
   font-weight: 500;
   color: var(--mw-text-color);
   line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-/* Progress Bar - M3 圆角 */
+/* Progress Bar */
 .mw-numerical-bar {
   height: var(--mw-numerical-progress-height);
   width: 100%;
   border-radius: var(--mw-radius-sm);
-  background: linear-gradient(
-    to right,
-    var(--mw-primary-color) 0% calc(var(--progress) * 1%),
-    var(--mw-outline-variant) calc(var(--progress) * 1%) 100%
-  );
-  transition: background var(--mw-transition-base);
+  background: var(--mw-outline-variant);
   overflow: hidden;
+  position: relative;
+}
+
+.mw-numerical-bar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: calc(var(--progress) * 1%);
+  background: linear-gradient(90deg, 
+    var(--mw-primary-color) 0%, 
+    var(--mw-primary-color) 100%
+  );
+  border-radius: var(--mw-radius-sm);
+  transition: width 0.3s ease;
+}
+
+.mw-numerical-item--progress:hover .mw-numerical-bar::before {
+  box-shadow: 0 0 8px var(--mw-primary-color);
 }
 
 /* Value Display */
@@ -118,19 +222,45 @@
   color: var(--mw-text-muted);
   font-family: var(--mw-font-mono);
   line-height: 1.2;
+  white-space: nowrap;
 }
 
 /* ========== Responsive Design ========== */
 
-/* Mobile: Stack icon above content if needed */
-@media (max-width: 480px) {
-  .mw-numerical-item {
-    grid-template-columns: 1fr;
-    gap: var(--mw-spacing-xs);
+/* 平板：2 列 */
+@media (max-width: 768px) {
+  .mw-numerical-item--progress {
+    flex: 1 1 calc(50% - var(--mw-spacing-md));
+    min-width: 180px;
   }
   
-  .mw-numerical-icon {
-    width: 100%;
-    justify-content: flex-start;
+  .mw-numerical-item--simple {
+    width: 130px;
+    height: 130px;
+  }
+  
+  .mw-numerical-value-large {
+    font-size: 2.5rem;
+  }
+}
+
+/* 手机：单列堆叠 */
+@media (max-width: 480px) {
+  .mw-numerical-item--progress {
+    flex: 1 1 100%;
+    min-width: 0;
+  }
+  
+  .mw-numerical-item--progress .mw-numerical-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+  
+  .mw-numerical-item--simple {
+    flex: 1 1 calc(50% - var(--mw-spacing-sm));
+    width: auto;
+    height: auto;
+    min-height: 120px;
   }
 }

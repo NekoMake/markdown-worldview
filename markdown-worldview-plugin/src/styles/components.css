@@ -189,3 +189,146 @@
     min-width: 44px;
   }
 }
+
+/* ========== Numerical Component ========== */
+/* 数值面板组件（卡片网格布局） */
+
+.mw-numerical {
+  background: var(--mw-bg-color);
+  border-radius: var(--mw-radius-lg);
+  padding: var(--mw-spacing-lg);
+  box-shadow: var(--mw-shadow-sm);
+}
+
+.mw-numerical-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 0 0 var(--mw-spacing-md) 0;
+  color: var(--mw-text-color);
+}
+
+/* 卡片网格容器 */
+.mw-numerical-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--mw-spacing-md);
+  width: 100%;
+}
+
+.mw-numerical-grid + .mw-numerical-grid {
+  margin-top: var(--mw-spacing-md);
+}
+
+/* 卡片基础样式 */
+.mw-numerical-card {
+  flex: 1 1 calc(33.333% - var(--mw-spacing-md));
+  min-width: 200px;
+  background: var(--mw-surface-container-low);
+  border: 1px solid var(--mw-border-color);
+  border-radius: var(--mw-radius-md);
+  padding: var(--mw-spacing-md);
+  transition: all var(--mw-transition-base);
+  display: flex;
+  flex-direction: column;
+  gap: var(--mw-spacing-sm);
+  min-height: 120px;
+}
+
+.mw-numerical-card:hover {
+  background: var(--mw-surface-container);
+  border-color: var(--mw-outline);
+  transform: translateY(-2px);
+  box-shadow: var(--mw-shadow-md);
+}
+
+/* 卡片头部（图标 + 标签） */
+.mw-numerical-card-header {
+  display: flex;
+  align-items: center;
+  gap: var(--mw-spacing-xs);
+}
+
+.mw-numerical-card-icon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.mw-numerical-card-label {
+  font-size: 0.8125rem;
+  color: var(--mw-text-muted);
+  font-weight: 500;
+  flex: 1;
+  line-height: 1.3;
+}
+
+/* 卡片内容区 */
+.mw-numerical-card-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* 有进度条的卡片 */
+.mw-numerical-card--progress .mw-numerical-card-bar {
+  height: 16px;
+  background: var(--mw-surface-container-highest);
+  border-radius: 999px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+
+.mw-numerical-card--progress .mw-numerical-card-bar::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: var(--progress, 0%);
+  background: linear-gradient(90deg, var(--mw-primary-color) 0%, var(--mw-hover-color) 100%);
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+.mw-numerical-card--progress .mw-numerical-card-value {
+  font-size: 0.75rem;
+  color: var(--mw-text-muted);
+  text-align: center;
+}
+
+/* 无进度条的卡片 */
+.mw-numerical-card--simple .mw-numerical-card-value-large {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--mw-text-color);
+  text-align: center;
+  line-height: 1;
+}
+
+.mw-numerical-card--simple .mw-numerical-card-unit {
+  font-size: 0.6875rem;
+  color: var(--mw-text-muted);
+  text-align: center;
+  margin-top: 4px;
+}
+
+/* 响应式：小屏幕调整 */
+@media (max-width: 768px) {
+  .mw-numerical-card {
+    flex: 1 1 calc(50% - var(--mw-spacing-md));
+    min-height: 100px;
+  }
+  
+  .mw-numerical-card--simple .mw-numerical-card-value-large {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mw-numerical-card {
+    flex: 1 1 100%;
+  }
+}
