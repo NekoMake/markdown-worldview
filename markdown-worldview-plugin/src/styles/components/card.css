@@ -4,20 +4,33 @@
  * 介绍卡片样式 - 用于人物、组织或地点
  */
 
-/* ========== Card Container ========== */
+/* ========== Card Container - M3 Expressive ========== */
 .mw-card {
   display: flex;
   flex-direction: column;
   gap: var(--mw-spacing-md);
-  background: var(--mw-bg-color);
-  border: 1px solid var(--mw-border-color);
-  border-radius: var(--mw-radius-md);
+  background: var(--mw-surface-container-low);
+  border: none;
+  border-radius: var(--mw-radius-lg);
   padding: var(--mw-spacing-lg);
   margin: var(--mw-spacing-lg) 0;
-  box-shadow: var(--mw-shadow-sm);
+  box-shadow: none;
+  position: relative;
+  overflow: hidden;
   transition: 
     box-shadow var(--mw-transition-base),
     transform var(--mw-transition-base);
+}
+
+/* M3 边框效果 */
+.mw-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--mw-radius-lg);
+  border: 1px solid var(--mw-outline-variant);
+  pointer-events: none;
+  transition: border-color var(--mw-transition-base);
 }
 
 /* Clickable card variant */
@@ -28,6 +41,14 @@
 .mw-card.mw-clickable:hover {
   transform: translateY(-2px);
   box-shadow: var(--mw-shadow-md);
+}
+
+.mw-card.mw-clickable:hover::before {
+  border-color: var(--mw-primary-color);
+}
+
+.mw-card:hover {
+  background: var(--mw-surface-container);
 }
 
 .mw-card.mw-clickable:active {
@@ -45,16 +66,18 @@
   color: var(--mw-error-color);
 }
 
-/* ========== Avatar ========== */
+/* ========== Avatar - M3 圆角方形 ========== */
 .mw-card-avatar {
   width: 100%;
   max-width: var(--mw-card-avatar-size);
   height: auto;
   aspect-ratio: 1;
   object-fit: cover;
-  border-radius: 50%;
-  border: var(--mw-card-avatar-border) solid var(--mw-border-color);
+  border-radius: 20px;
+  border: none;
   margin: 0 auto;
+  background: var(--mw-surface-container-highest);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 /* ========== Card Body ========== */
@@ -65,14 +88,15 @@
   flex: 1;
 }
 
-/* ========== Name (Title) ========== */
+/* ========== Name (Title) - M3 Typography ========== */
 .mw-card-name {
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.3;
   margin: 0;
   color: var(--mw-text-color);
   text-align: center;
+  letter-spacing: 0;
 }
 
 /* ========== Description ========== */
@@ -84,15 +108,18 @@
   text-align: center;
 }
 
-/* ========== Dictum (Quote) ========== */
+/* ========== Dictum (Quote) - M3 风格 ========== */
 .mw-card-dictum {
   font-size: 0.95rem;
   font-style: italic;
   line-height: 1.5;
   color: var(--mw-text-muted);
   margin: var(--mw-spacing-sm) 0;
+  padding: var(--mw-spacing-sm) var(--mw-spacing-md);
   padding-left: var(--mw-spacing-md);
   border-left: 3px solid var(--mw-primary-color);
+  background: var(--mw-surface-container);
+  border-radius: 0 12px 12px 0;
   text-align: left;
 }
 
@@ -111,11 +138,20 @@
 }
 
 .mw-card-tags .mw-badge {
-  font-size: 0.875rem;
-  padding: var(--mw-spacing-xs) var(--mw-spacing-sm);
-  background: var(--mw-border-color);
-  color: var(--mw-text-color);
+  font-size: 0.8rem;
+  padding: 4px 12px;
+  background: var(--mw-surface-container-highest);
+  color: var(--mw-text-muted);
   border-radius: var(--mw-radius-sm);
+  border: 1px solid var(--mw-outline-variant);
+  font-weight: 500;
+  transition: all var(--mw-transition-fast);
+}
+
+.mw-card-tags .mw-badge:hover {
+  background: var(--mw-secondary-container);
+  color: var(--mw-on-secondary-container);
+  border-color: transparent;
 }
 
 /* ========== Responsive Design ========== */

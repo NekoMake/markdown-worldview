@@ -4,14 +4,36 @@
  * 数值面板样式 - 展示进度条和数值指标
  */
 
-/* ========== Numerical Container ========== */
+/* ========== Numerical Container - M3 Expressive ========== */
 .mw-numerical {
-  background: var(--mw-bg-color);
-  border: 1px solid var(--mw-border-color);
-  border-radius: var(--mw-radius-md);
+  background: var(--mw-surface-container-low);
+  border: none;
+  border-radius: var(--mw-radius-lg);
   padding: var(--mw-spacing-lg);
   margin: var(--mw-spacing-lg) 0;
-  box-shadow: var(--mw-shadow-sm);
+  box-shadow: none;
+  position: relative;
+  overflow: hidden;
+  transition: background var(--mw-transition-base);
+}
+
+/* M3 边框效果 */
+.mw-numerical::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--mw-radius-lg);
+  border: 1px solid var(--mw-outline-variant);
+  pointer-events: none;
+  transition: border-color var(--mw-transition-base);
+}
+
+.mw-numerical:hover {
+  background: var(--mw-surface-container);
+}
+
+.mw-numerical:hover::before {
+  border-color: var(--mw-primary-color);
 }
 
 /* Error state */
@@ -45,15 +67,19 @@
   margin-bottom: 0;
 }
 
-/* Icon (optional) */
+/* Icon (optional) - M3 图标容器 */
 .mw-numerical-icon {
-  font-size: calc(var(--mw-numerical-icon-size) * 0.75);
+  font-size: 20px;
   line-height: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: var(--mw-numerical-icon-size);
-  height: var(--mw-numerical-icon-size);
+  width: 40px;
+  height: 40px;
+  background: var(--mw-primary-container);
+  color: var(--mw-on-primary-container);
+  border-radius: 12px;
+  flex-shrink: 0;
 }
 
 /* ========== Content Area ========== */
@@ -71,7 +97,7 @@
   line-height: 1.2;
 }
 
-/* Progress Bar */
+/* Progress Bar - M3 圆角 */
 .mw-numerical-bar {
   height: var(--mw-numerical-progress-height);
   width: 100%;
@@ -79,9 +105,10 @@
   background: linear-gradient(
     to right,
     var(--mw-primary-color) 0% calc(var(--progress) * 1%),
-    var(--mw-border-color) calc(var(--progress) * 1%) 100%
+    var(--mw-outline-variant) calc(var(--progress) * 1%) 100%
   );
   transition: background var(--mw-transition-base);
+  overflow: hidden;
 }
 
 /* Value Display */

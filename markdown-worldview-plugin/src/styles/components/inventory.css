@@ -4,17 +4,30 @@
  * 物品/装备网格样式
  */
 
-/* ========== Inventory Container ========== */
+/* ========== Inventory Container - M3 Expressive ========== */
 .mw-inventory {
   display: grid;
   grid-template-columns: repeat(var(--columns, var(--mw-inventory-columns)), 1fr);
   gap: var(--mw-spacing-md);
   padding: var(--mw-spacing-lg);
   margin: var(--mw-spacing-lg) 0;
-  background: var(--mw-bg-color);
-  border: 1px solid var(--mw-border-color);
-  border-radius: var(--mw-radius-md);
-  box-shadow: var(--mw-shadow-sm);
+  background: var(--mw-surface-container-low);
+  border: none;
+  border-radius: var(--mw-radius-lg);
+  box-shadow: none;
+  position: relative;
+  overflow: hidden;
+}
+
+/* M3 边框效果 */
+.mw-inventory::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--mw-radius-lg);
+  border: 1px solid var(--mw-outline-variant);
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* Error state */
@@ -27,7 +40,7 @@
   color: var(--mw-error-color);
 }
 
-/* ========== Inventory Item ========== */
+/* ========== Inventory Item - M3 卡片 ========== */
 .mw-inventory-item {
   position: relative;
   display: flex;
@@ -36,14 +49,15 @@
   gap: var(--mw-spacing-xs);
   padding: var(--mw-spacing-sm);
   background: var(--mw-bg-color);
-  border: var(--mw-inventory-border-width) solid var(--mw-border-color);
-  border-radius: var(--mw-radius-sm);
+  border: 1px solid var(--mw-outline-variant);
+  border-radius: var(--mw-radius-md);
   transition: 
     transform var(--mw-transition-fast),
     box-shadow var(--mw-transition-fast),
     border-color var(--mw-transition-fast),
-    border-width var(--mw-transition-fast);
+    background var(--mw-transition-fast);
   min-height: var(--mw-inventory-item-min-height);
+  z-index: 1;
 }
 
 /* Clickable variant */
@@ -53,7 +67,8 @@
 
 .mw-inventory-item.mw-clickable:hover {
   transform: translateY(-2px);
-  box-shadow: var(--mw-shadow-md);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  background: var(--mw-surface-container);
 }
 
 .mw-inventory-item.mw-clickable:active {
@@ -77,9 +92,9 @@
   border-color: var(--mw-rarity-legendary);
 }
 
-/* Hover effect for rarity */
+/* Hover effect for rarity - 保持边框宽度 */
 .mw-inventory-item:hover {
-  border-width: var(--mw-inventory-border-width-hover);
+  /* M3 不使用边框宽度变化，避免布局抖动 */
 }
 
 /* ========== Icon ========== */
