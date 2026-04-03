@@ -1,0 +1,113 @@
+/**
+ * Dark Forest Theme for Markdown-Worldview
+ * 
+ * 深色森林主题 - 适合深色模式，营造神秘的森林氛围
+ * 
+ * 使用方法：
+ * 在VitePress主题中导入：
+ * import 'markdown-worldview/style.css'
+ * import './dark-forest.css'
+ */
+
+:root {
+  /* ========== 主色调：森林绿 ========== */
+  --mw-primary-color: #10b981;
+  --mw-bg-color: #1a2e1a;
+  --mw-text-color: #d1fae5;
+  --mw-text-muted: #86efac;
+  --mw-border-color: #2d5f3d;
+
+  /* ========== 状态颜色 ========== */
+  --mw-pos-color: #34d399;
+  --mw-neg-color: #f87171;
+  --mw-neu-color: #6ee7b7;
+
+  /* ========== 稀有度颜色（调整以适应深色背景）========== */
+  --mw-rarity-common: #9ca3af;
+  --mw-rarity-rare: #60a5fa;
+  --mw-rarity-epic: #a78bfa;
+  --mw-rarity-legendary: #fbbf24;
+
+  /* ========== 语义颜色 ========== */
+  --mw-success-color: #34d399;
+  --mw-warning-color: #fbbf24;
+  --mw-error-color: #f87171;
+  --mw-info-color: #6ee7b7;
+
+  /* ========== 交互状态 ========== */
+  --mw-hover-color: #34d399;
+  --mw-focus-color: #10b981;
+  --mw-active-color: #059669;
+  --mw-focus-ring: 0 0 0 3px rgba(16, 185, 129, 0.4);
+
+  /* ========== 阴影：更深，营造层次感 ========== */
+  --mw-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+  --mw-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+  --mw-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.6);
+
+  /* ========== 组件尺寸：稍微增大 ========== */
+  --mw-card-avatar-size: 140px;
+  --mw-card-avatar-size-tablet: 170px;
+  --mw-card-avatar-size-desktop: 200px;
+  
+  --mw-numerical-icon-size: 2.5rem;
+  --mw-inventory-columns: 5;
+}
+
+/* ========== 特殊效果：发光 ========== */
+
+/* 卡片微光效果 */
+.mw-card {
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.mw-card.mw-clickable:hover {
+  box-shadow: 
+    0 10px 15px -3px rgba(0, 0, 0, 0.6),
+    0 0 30px rgba(16, 185, 129, 0.2);
+  border-color: rgba(16, 185, 129, 0.5);
+  transform: translateY(-3px);
+}
+
+/* 数值面板发光效果 */
+.mw-numerical {
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.5),
+    0 0 15px rgba(16, 185, 129, 0.08);
+}
+
+/* 传说物品额外发光 */
+.mw-inventory-item.mw-rarity-legendary {
+  box-shadow: 
+    inset 0 0 20px rgba(251, 191, 36, 0.2),
+    0 0 15px rgba(251, 191, 36, 0.3);
+  animation: legendaryPulse 3s ease-in-out infinite;
+}
+
+@keyframes legendaryPulse {
+  0%, 100% {
+    box-shadow: 
+      inset 0 0 20px rgba(251, 191, 36, 0.2),
+      0 0 15px rgba(251, 191, 36, 0.3);
+  }
+  50% {
+    box-shadow: 
+      inset 0 0 30px rgba(251, 191, 36, 0.3),
+      0 0 25px rgba(251, 191, 36, 0.5);
+  }
+}
+
+/* 进度条发光 */
+.mw-numerical-progress-bar {
+  box-shadow: 0 0 8px currentColor;
+}
+
+/* Badge 发光效果 */
+.mw-badge {
+  background: rgba(16, 185, 129, 0.2);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.2);
+}

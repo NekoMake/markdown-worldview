@@ -29,7 +29,7 @@ export default defineConfig({
     nav: [
       { text: '首页', link: '/' },
       { text: '指南', link: '/guide/quickstart' },
-      { text: '组件', link: '/components/card' }
+      { text: '组件', link: '/components/card' },
     ],
 
     // 基于路径的侧边栏配置
@@ -39,7 +39,8 @@ export default defineConfig({
           text: '开发指南',
           items: [
             { text: '快速开始', link: '/guide/quickstart' },
-            { text: '安装与配置', link: '/guide/installation' }
+            { text: '安装与配置', link: '/guide/installation' },
+            { text: '主题定制', link: '/guide/theming' }
           ]
         }
       ],

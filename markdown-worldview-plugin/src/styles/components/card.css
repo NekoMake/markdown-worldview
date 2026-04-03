@@ -48,12 +48,12 @@
 /* ========== Avatar ========== */
 .mw-card-avatar {
   width: 100%;
-  max-width: 120px;
+  max-width: var(--mw-card-avatar-size);
   height: auto;
   aspect-ratio: 1;
   object-fit: cover;
   border-radius: 50%;
-  border: 2px solid var(--mw-border-color);
+  border: var(--mw-card-avatar-border) solid var(--mw-border-color);
   margin: 0 auto;
 }
 
@@ -125,11 +125,12 @@
   .mw-card {
     flex-direction: row;
     align-items: flex-start;
+    max-width: var(--mw-card-max-width);
   }
   
   .mw-card-avatar {
     margin: 0;
-    max-width: 150px;
+    max-width: calc(var(--mw-card-avatar-size) * 1.25);
     flex-shrink: 0;
   }
   
@@ -146,7 +147,7 @@
 /* Large desktop: Larger avatar */
 @media (min-width: 1024px) {
   .mw-card-avatar {
-    max-width: 180px;
+    max-width: calc(var(--mw-card-avatar-size) * 1.5);
   }
   
   .mw-card-name {

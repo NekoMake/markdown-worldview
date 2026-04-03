@@ -47,13 +47,13 @@
 
 /* Icon (optional) */
 .mw-numerical-icon {
-  font-size: 1.5rem;
+  font-size: calc(var(--mw-numerical-icon-size) * 0.75);
   line-height: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2rem;
-  height: 2rem;
+  width: var(--mw-numerical-icon-size);
+  height: var(--mw-numerical-icon-size);
 }
 
 /* ========== Content Area ========== */
@@ -73,7 +73,7 @@
 
 /* Progress Bar */
 .mw-numerical-bar {
-  height: 8px;
+  height: var(--mw-numerical-progress-height);
   width: 100%;
   border-radius: var(--mw-radius-sm);
   background: linear-gradient(

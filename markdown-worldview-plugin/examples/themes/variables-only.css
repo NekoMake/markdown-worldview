@@ -1,0 +1,90 @@
+/**
+ * Variables Only Theme for Markdown-Worldview
+ * 
+ * 仅变量覆盖示例 - 最小化自定义，只修改关键变量
+ * 
+ * 这是推荐的主题定制方式：仅覆盖需要改变的CSS变量，
+ * 其他样式保持默认，便于维护和升级。
+ * 
+ * 使用方法：
+ * 在VitePress主题中导入：
+ * import 'markdown-worldview/style.css'
+ * import './variables-only.css'
+ */
+
+:root {
+  /* ========== 颜色定制 ========== */
+  
+  /* 主色调改为橙红色 */
+  --mw-primary-color: #ff5733;
+  
+  /* 调整交互色以匹配主色 */
+  --mw-hover-color: #ff4520;
+  --mw-focus-color: #ff5733;
+  --mw-active-color: #e03e1f;
+  --mw-focus-ring: 0 0 0 3px rgba(255, 87, 51, 0.2);
+  
+  /* ========== 尺寸定制 ========== */
+  
+  /* 更大的卡片头像 */
+  --mw-card-avatar-size: 150px;
+  --mw-card-avatar-size-tablet: 180px;
+  --mw-card-avatar-size-desktop: 220px;
+  
+  /* 6列物品网格（默认4列） */
+  --mw-inventory-columns: 6;
+  
+  /* 更大的数值面板图标 */
+  --mw-numerical-icon-size: 3rem;
+  
+  /* 更粗的进度条 */
+  --mw-numerical-progress-height: 12px;
+  
+  /* ========== 间距定制 ========== */
+  
+  /* 更宽松的间距 */
+  --mw-spacing-lg: 2rem;     /* 默认1.5rem */
+  --mw-spacing-xl: 3rem;     /* 默认2rem */
+  
+  /* ========== 圆角定制 ========== */
+  
+  /* 更圆润的圆角 */
+  --mw-radius-md: 16px;      /* 默认8px */
+  --mw-radius-lg: 24px;      /* 默认12px */
+  
+  /* ========== 阴影定制 ========== */
+  
+  /* 更强的阴影效果 */
+  --mw-shadow-md: 0 6px 10px -2px rgba(0, 0, 0, 0.15);
+  --mw-shadow-lg: 0 15px 25px -5px rgba(0, 0, 0, 0.2);
+}
+
+/* ========== 深色模式调整（可选）========== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 深色模式下主色稍微提亮 */
+    --mw-primary-color: #ff6b4a;
+    
+    /* 深色模式下阴影更浓 */
+    --mw-shadow-md: 0 6px 10px -2px rgba(0, 0, 0, 0.4);
+    --mw-shadow-lg: 0 15px 25px -5px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* ========== 细微调整（可选）========== */
+
+/* 为所有卡片添加微妙的渐变背景 */
+.mw-card {
+  background: linear-gradient(
+    135deg,
+    var(--mw-bg-color) 0%,
+    rgba(255, 87, 51, 0.01) 100%
+  );
+}
+
+/* 传说物品发光效果增强 */
+.mw-inventory-item.mw-rarity-legendary {
+  box-shadow: 
+    0 0 15px rgba(251, 191, 36, 0.4),
+    inset 0 0 20px rgba(251, 191, 36, 0.1);
+}

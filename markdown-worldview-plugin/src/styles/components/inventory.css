@@ -7,7 +7,7 @@
 /* ========== Inventory Container ========== */
 .mw-inventory {
   display: grid;
-  grid-template-columns: repeat(var(--columns, 4), 1fr);
+  grid-template-columns: repeat(var(--columns, var(--mw-inventory-columns)), 1fr);
   gap: var(--mw-spacing-md);
   padding: var(--mw-spacing-lg);
   margin: var(--mw-spacing-lg) 0;
@@ -36,13 +36,14 @@
   gap: var(--mw-spacing-xs);
   padding: var(--mw-spacing-sm);
   background: var(--mw-bg-color);
-  border: 2px solid var(--mw-border-color);
+  border: var(--mw-inventory-border-width) solid var(--mw-border-color);
   border-radius: var(--mw-radius-sm);
   transition: 
     transform var(--mw-transition-fast),
     box-shadow var(--mw-transition-fast),
-    border-color var(--mw-transition-fast);
-  min-height: 100px;
+    border-color var(--mw-transition-fast),
+    border-width var(--mw-transition-fast);
+  min-height: var(--mw-inventory-item-min-height);
 }
 
 /* Clickable variant */
@@ -78,26 +79,26 @@
 
 /* Hover effect for rarity */
 .mw-inventory-item:hover {
-  border-width: 3px;
+  border-width: var(--mw-inventory-border-width-hover);
 }
 
 /* ========== Icon ========== */
 .mw-inventory-icon {
-  width: 48px;
-  height: 48px;
+  width: var(--mw-inventory-icon-size);
+  height: var(--mw-inventory-icon-size);
   object-fit: contain;
   border-radius: var(--mw-radius-sm);
 }
 
 .mw-inventory-icon-placeholder {
-  width: 48px;
-  height: 48px;
+  width: var(--mw-inventory-icon-size);
+  height: var(--mw-inventory-icon-size);
   display: flex;
   align-items: center;
   justify-content: center;
   background: var(--mw-border-color);
   border-radius: var(--mw-radius-sm);
-  font-size: 1.5rem;
+  font-size: calc(var(--mw-inventory-icon-size) * 0.625);
   color: var(--mw-text-muted);
   font-weight: bold;
 }
@@ -144,7 +145,7 @@
   }
 }
 
-/* Desktop: Respect columns parameter */
+/* Desktop: Use larger icons if space allows */
 @media (min-width: 768px) {
   .mw-inventory-icon,
   .mw-inventory-icon-placeholder {

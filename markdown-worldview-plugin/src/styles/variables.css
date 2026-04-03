@@ -76,6 +76,23 @@
   --mw-transition-fast: 150ms ease;
   --mw-transition-base: 250ms ease;
   --mw-transition-slow: 350ms ease;
+
+  /* ========== Component Sizes ========== */
+  /* Card component */
+  --mw-card-avatar-size: 120px;
+  --mw-card-avatar-border: 2px;
+  --mw-card-max-width: none;
+
+  /* Numerical component */
+  --mw-numerical-icon-size: 2rem;
+  --mw-numerical-progress-height: 8px;
+
+  /* Inventory component */
+  --mw-inventory-columns: 4;
+  --mw-inventory-item-min-height: 100px;
+  --mw-inventory-icon-size: 48px;
+  --mw-inventory-border-width: 2px;
+  --mw-inventory-border-width-hover: 3px;
 }
 
 /* ========== Dark Mode ========== */

@@ -1,3 +1,13 @@
 vitepress/node_modules
 vitepress/MarkDown/.vitepress/cache
 /cache/
+vitepress/.vitepress/cache/deps/_metadata.json
+vitepress/.vitepress/cache/deps/chunk-4RM5L5PJ.js
+vitepress/.vitepress/cache/deps/chunk-4RM5L5PJ.js.map
+vitepress/.vitepress/cache/deps/package.json
+vitepress/.vitepress/cache/deps/vitepress___@vue_devtools-api.js
+vitepress/.vitepress/cache/deps/vitepress___@vue_devtools-api.js.map
+vitepress/.vitepress/cache/deps/vitepress___@vueuse_core.js
+vitepress/.vitepress/cache/deps/vitepress___@vueuse_core.js.map
+vitepress/.vitepress/cache/deps/vue.js
+vitepress/.vitepress/cache/deps
