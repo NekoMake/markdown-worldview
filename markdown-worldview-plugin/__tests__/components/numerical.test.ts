@@ -78,7 +78,7 @@ items:
     const html = renderNumerical(yaml, defaultOptions);
     
     expect(html).toContain('金币');
-    expect(html).toContain('9999</span>');
+    expect(html).toContain('9999</div>');
     expect(html).not.toContain('mw-numerical-bar');
     // No "value / max" format, just the value
     expect(html).not.toMatch(/\d+\s*\/\s*\d+/);
