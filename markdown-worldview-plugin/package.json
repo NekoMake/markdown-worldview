@@ -64,7 +64,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/NekoMake/markdown-worldview.git"
+    "url": "git+https://github.com/NekoMake/markdown-worldview.git"
   },
   "bugs": {
     "url": "https://github.com/NekoMake/markdown-worldview/issues"
