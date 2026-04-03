@@ -17,7 +17,8 @@ export interface PowerData {
   faction: string;                                   // 必填：势力名称
   leader?: string;                                   // 可选：领袖
   status?: string;                                   // 可选：状态（战争状态、和平时期等）
-  data: Record<string, number | [number, string]>;  // 必填：数值数据
+  meta?: Record<string, string>;                     // 可选：其他自定义信息键值对
+  data: Record<string, number | [number, string]>;   // 必填：数值数据
   trend?: Record<string, 'rising' | 'stable' | 'falling'>;  // 可选：趋势
 }
 
@@ -108,18 +109,30 @@ export function renderPower(content: string, options: MarkdownWorldviewOptions):
     // === 头部信息（纯 CSS） ===
     html += '<div class="mw-power-header">';
     
-    // 势力名称
+    // 左侧：名称与状态
+    html += '<div class="mw-power-title-group">';
     html += `<h3 class="mw-power-faction">${faction}</h3>`;
     
     // 状态标签
     if (status) {
       html += `<div class="mw-power-status ${statusClass}">${status}</div>`;
     }
+    html += '</div>'; // end .mw-power-title-group
     
-    // 领袖
+    // 右侧：领袖等附加数据
+    html += '<div class="mw-power-meta-group">';
     if (leader) {
-      html += `<p class="mw-power-leader">领袖：${leader}</p>`;
+      html += `<span class="mw-power-leader">领袖：${leader}</span>`;
     }
+    
+    // 自定义其他信息键值对
+    if (data.meta && typeof data.meta === 'object' && !Array.isArray(data.meta)) {
+      for (const [key, val] of Object.entries(data.meta)) {
+        html += `<span class="mw-power-extra">${escapeHtml(key)}：${escapeHtml(String(val))}</span>`;
+      }
+    }
+    
+    html += '</div>'; // end .mw-power-meta-group
     
     html += '</div>'; // end .mw-power-header
     

@@ -26,6 +26,66 @@ export interface NumericalData {
 }
 
 /**
+ * 渲染单个数值项
+ * 
+ * @param item - 数值项数据
+ * @param hasProgress - 是否有进度条
+ * @returns HTML 字符串
+ */
+function renderNumericalItem(item: NumericalItem, hasProgress: boolean): string {
+  const label = escapeHtml(String(item.label));
+  const value = Number(item.value);
+  const max = item.max !== undefined ? Number(item.max) : null;
+  const icon = item.icon ? escapeHtml(item.icon) : null;
+  
+  // 计算进度百分比
+  const progress = max ? Math.min(100, Math.max(0, (value / max) * 100)) : null;
+  
+  // 根据是否有进度条选择不同的类名
+  const itemClass = hasProgress ? 'mw-numerical-item mw-numerical-item--progress' : 'mw-numerical-item mw-numerical-item--simple';
+  
+  let html = `<div class="${itemClass}">`;
+  
+  // 图标（如果有）
+  if (icon) {
+    html += `<span class="mw-numerical-icon">${icon}</span>`;
+  }
+  
+  // 内容区域（只有带进度条的需要）
+  if (hasProgress) {
+    html += '<div class="mw-numerical-content">';
+    
+    // 标签
+    html += `<span class="mw-numerical-label">${label}</span>`;
+    
+    // 进度条
+    if (max !== null && progress !== null) {
+      html += `<div class="mw-numerical-bar" style="--progress: ${progress.toFixed(2)}"></div>`;
+    }
+    
+    // 数值显示
+    html += `<span class="mw-numerical-value">${value} / ${max}</span>`;
+    
+    html += '</div>'; // .mw-numerical-content
+  } else {
+    // 不带进度条的简单布局
+    html += '<div class="mw-numerical-content">';
+    
+    // 标签
+    html += `<span class="mw-numerical-label">${label}</span>`;
+    
+    // 数字用带背景的矩形包裹
+    html += `<span class="mw-numerical-value-large">${value}</span>`;
+    
+    html += '</div>'; // .mw-numerical-content
+  }
+  
+  html += '</div>'; // .mw-numerical-item
+  
+  return html;
+}
+
+/**
  * 渲染 Numerical 组件
  * 
  * @param content - YAML 内容字符串
@@ -49,6 +109,27 @@ export function renderNumerical(content: string, options: MarkdownWorldviewOptio
       throw new Error('items 数组不能为空');
     }
     
+    // 将 items 按是否有进度条分组
+    const itemsWithProgress: NumericalItem[] = [];
+    const itemsSimple: NumericalItem[] = [];
+    
+    for (const item of data.items) {
+      // 验证每个 item 的必填字段 - 跳过无效项而不是抛出错误
+      if (!item.label || typeof item.value !== 'number') {
+        if (options.debug) {
+          console.warn('[numerical] 跳过无效项:', item);
+        }
+        continue;
+      }
+      
+      // 根据是否有 max 来分组
+      if (item.max !== undefined) {
+        itemsWithProgress.push(item);
+      } else {
+        itemsSimple.push(item);
+      }
+    }
+    
     // 构建 HTML
     let html = '<div class="mw-numerical">';
     
@@ -57,72 +138,22 @@ export function renderNumerical(content: string, options: MarkdownWorldviewOptio
       html += `<h3 class="mw-numerical-title">${title}</h3>`;
     }
     
-    // 分组：先收集有进度条的项和无进度条的项
-    const progressItems: Array<{label: string; value: number; max: number; icon: string | null; progress: number}> = [];
-    const simpleItems: Array<{label: string; value: number; icon: string | null}> = [];
-    
-    for (const item of data.items) {
-      // 验证每个 item 的必填字段 - 跳过无效项
-      if (!item.label || typeof item.value !== 'number') {
-        if (options.debug) {
-          console.warn('[numerical] 跳过无效项:', item);
-        }
-        continue;
-      }
-      
-      const label = escapeHtml(String(item.label));
-      const value = Number(item.value);
-      const max = item.max !== undefined ? Number(item.max) : null;
-      const icon = item.icon ? escapeHtml(item.icon) : null;
-      
-      if (max !== null) {
-        // 有进度条的项
-        const progress = Math.min(100, Math.max(0, (value / max) * 100));
-        progressItems.push({ label, value, max, icon, progress });
-      } else {
-        // 无进度条的项
-        simpleItems.push({ label, value, icon });
+    // 渲染带进度条的项（第一行）
+    if (itemsWithProgress.length > 0) {
+      for (const item of itemsWithProgress) {
+        html += renderNumericalItem(item, true);
       }
     }
     
-    // 渲染有进度条的卡片（如果有）
-    if (progressItems.length > 0) {
-      for (const item of progressItems) {
-        html += '<div class="mw-numerical-item mw-numerical-item--progress">';
-        
-        // 图标（可选）
-        if (item.icon) {
-          html += `<span class="mw-numerical-icon">${item.icon}</span>`;
-        }
-        
-        // 内容区域
-        html += '<div class="mw-numerical-content">';
-        html += `<div class="mw-numerical-label">${item.label}</div>`;
-        html += `<div class="mw-numerical-bar" style="--progress: ${item.progress.toFixed(2)}"></div>`;
-        html += `<div class="mw-numerical-value">${item.value} / ${item.max}</div>`;
-        html += '</div>'; // .mw-numerical-content
-        
-        html += '</div>'; // .mw-numerical-item
-      }
+    // 在两组之间添加强制换行（如果两组都存在）
+    if (itemsWithProgress.length > 0 && itemsSimple.length > 0) {
+      html += '<div class="mw-numerical-break"></div>';
     }
     
-    // 渲染无进度条的卡片（如果有）
-    if (simpleItems.length > 0) {
-      for (const item of simpleItems) {
-        html += '<div class="mw-numerical-item mw-numerical-item--simple">';
-        
-        // 图标（可选，在右上角）
-        if (item.icon) {
-          html += `<span class="mw-numerical-icon">${item.icon}</span>`;
-        }
-        
-        // 大数值
-        html += `<div class="mw-numerical-value-large">${item.value}</div>`;
-        
-        // 标签
-        html += `<div class="mw-numerical-label">${item.label}</div>`;
-        
-        html += '</div>'; // .mw-numerical-item
+    // 渲染不带进度条的项（第二行）
+    if (itemsSimple.length > 0) {
+      for (const item of itemsSimple) {
+        html += renderNumericalItem(item, false);
       }
     }
     

@@ -15,27 +15,37 @@
 
 /* === 头部信息 === */
 .mw-power-header {
-  padding: var(--mw-space-lg);
   background: var(--mw-bg-color);
   border-bottom: 1px solid var(--mw-border-color);
 }
 
+.mw-power-title-group {
+  display: flex;
+  align-items: baseline;
+  gap: var(--mw-space-xl);
+  flex-wrap: wrap;
+  padding: var(--mw-space-md) var(--mw-space-lg);
+  border-bottom: 1px solid var(--mw-border-color);
+  line-height: 1.6;
+}
+
 .mw-power-faction {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: 600;
-  margin: 0 0 var(--mw-space-sm) 0;
+  margin: 0;
   color: var(--mw-text-color);
   font-family: var(--mw-font-sans);
+  line-height: 1.4;
 }
 
 .mw-power-status {
   display: inline-block;
-  padding: 0.25rem 0.75rem;
+  padding: 0.25rem 0.65rem;
   border-radius: var(--mw-radius-sm);
-  font-size: 0.875rem;
+  font-size: 0.85rem;
   font-weight: 500;
-  margin-bottom: var(--mw-space-sm);
   border: 1px solid currentColor;
+  line-height: 1.2;
 }
 
 /* 状态颜色映射 */
@@ -54,10 +64,25 @@
   background: rgba(107, 114, 128, 0.1);
 }
 
-.mw-power-leader {
-  margin: var(--mw-space-sm) 0 0;
+.mw-power-meta-group {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: calc(var(--mw-space-xl) * 1.5);
+  padding: var(--mw-space-md) var(--mw-space-lg);
+  line-height: 1.8;
+}
+
+.mw-power-leader,
+.mw-power-extra {
+  margin: 0;
   color: var(--mw-text-muted);
-  font-size: 0.9rem;
+  font-size: 1.05rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mw-space-xs);
+  line-height: 1.6;
 }
 
 /* === ECharts 图表容器 === */
@@ -113,12 +138,13 @@
 
 /* === 响应式布局 === */
 @media (max-width: 640px) {
-  .mw-power-header {
+  .mw-power-title-group,
+  .mw-power-meta-group {
     padding: var(--mw-space-md);
   }
   
   .mw-power-faction {
-    font-size: 1.1rem;
+    font-size: 1.25rem;
   }
   
   .mw-power-trend {

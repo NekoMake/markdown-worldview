@@ -16,15 +16,27 @@
   align-items: flex-start;
 }
 
+/* 强制换行元素 - 用于分隔带进度条和不带进度条的卡片 */
+.mw-numerical-break {
+  flex-basis: 100%;
+  width: 100%;
+  height: 0;
+  margin: 0;
+  padding: 0;
+}
+
 /* ========== Title ========== */
 .mw-numerical-title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  line-height: 1.4;
-  margin: 0 0 var(--mw-spacing-sm) 0;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: calc(var(--mw-spacing-md) * -1) 0 var(--mw-spacing-lg) 0;
   color: var(--mw-text-color);
   flex-basis: 100%;
   width: 100%;
+  padding-bottom: var(--mw-spacing-sm);
+  border-bottom: 2px solid var(--mw-primary-color);
+  letter-spacing: 0.5px;
 }
 
 /* Error state */
@@ -81,67 +93,79 @@
   align-items: center;
 }
 
-/* ========== 无进度条的项（正方形布局）========== */
+/* ========== 无进度条的项（长方形布局）========== */
 .mw-numerical-item--simple {
-  /* 正方形卡片 - 固定尺寸，不拉伸 */
-  flex: 0 0 150px;
-  width: 150px;
-  height: 150px;
-  min-width: 150px;
-  max-width: 150px;
+  /* 长方形卡片 - 三列布局，响应式调整 */
+  flex: 1 1 calc(33.333% - var(--mw-spacing-md));
+  min-width: 180px;
   position: relative;
   
-  /* 垂直居中布局 */
-  display: flex;
-  flex-direction: column;
+  /* 内部布局：左边图标，右边内容 */
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--mw-spacing-sm);
   align-items: center;
-  justify-content: center;
-  gap: var(--mw-spacing-xs);
-  text-align: center;
 }
 
-/* 正方形卡片的图标 */
+/* 简单卡片的图标 */
 .mw-numerical-item--simple .mw-numerical-icon {
-  position: absolute;
-  top: var(--mw-spacing-sm);
-  right: var(--mw-spacing-sm);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
-  font-size: 16px;
+  width: 48px;
+  height: 48px;
+  font-size: 24px;
   background: var(--mw-primary-container);
   color: var(--mw-on-primary-container);
-  border-radius: 8px;
+  border-radius: 12px;
+  flex-shrink: 0;
   transition: transform var(--mw-transition-fast);
 }
 
-/* 正方形卡片的大数字 */
-.mw-numerical-value-large {
-  font-size: 3rem;
-  font-weight: 700;
-  line-height: 1;
-  color: var(--mw-primary-color);
-  font-family: var(--mw-font-mono);
-  transition: transform var(--mw-transition-fast), color var(--mw-transition-fast);
+/* 简单卡片的内容区 */
+.mw-numerical-item--simple .mw-numerical-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mw-spacing-xs);
+  min-width: 0;
 }
 
-/* 正方形卡片的标签 */
+/* 简单卡片的标签 */
 .mw-numerical-item--simple .mw-numerical-label {
   font-size: 0.875rem;
   font-weight: 500;
   color: var(--mw-text-muted);
-  margin-top: var(--mw-spacing-xs);
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-/* 图标悬浮动画 */
+/* 简单卡片的数字容器 - 带背景的矩形 */
+.mw-numerical-value-large {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--mw-spacing-xs) var(--mw-spacing-md);
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--mw-on-primary-container);
+  background: var(--mw-primary-container);
+  border-radius: var(--mw-radius-md);
+  font-family: var(--mw-font-mono);
+  transition: transform var(--mw-transition-fast), background var(--mw-transition-fast);
+  align-self: flex-start;
+}
+
+/* 图标和数字悬浮动画 */
 .mw-numerical-item--simple:hover .mw-numerical-icon {
-  transform: scale(1.15) rotate(10deg);
+  transform: scale(1.1) rotate(5deg);
 }
 
 .mw-numerical-item--simple:hover .mw-numerical-value-large {
-  color: var(--mw-hover-color);
+  background: var(--mw-primary-color);
+  color: white;
   transform: scale(1.05);
 }
 
@@ -235,12 +259,12 @@
   }
   
   .mw-numerical-item--simple {
-    width: 130px;
-    height: 130px;
+    flex: 1 1 calc(50% - var(--mw-spacing-md));
+    min-width: 160px;
   }
   
   .mw-numerical-value-large {
-    font-size: 2.5rem;
+    font-size: 1.25rem;
   }
 }
 
@@ -258,9 +282,17 @@
   }
   
   .mw-numerical-item--simple {
-    flex: 1 1 calc(50% - var(--mw-spacing-sm));
-    width: auto;
-    height: auto;
-    min-height: 120px;
+    flex: 1 1 100%;
+    min-width: 0;
+  }
+  
+  .mw-numerical-item--simple .mw-numerical-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+  
+  .mw-numerical-value-large {
+    font-size: 1.125rem;
   }
 }

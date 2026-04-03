@@ -112,7 +112,16 @@ data:
 ````markdown
 ```power
 title: Empire of Light
-met🎨 主题定制
+metrics:
+  Economy: 85
+  Military: 90
+  Culture: 75
+  Technology: 80
+  Diplomacy: 70
+```
+````
+
+### 主题自定义
 
 ```css
 /* 自定义主题 */

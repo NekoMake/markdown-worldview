@@ -79,40 +79,50 @@ export function buildRadarConfig(data: RadarData): EChartsOption {
       textStyle: {
         color: colors.text,
         fontSize: 16,
-        fontWeight: 600
-      }
+        fontWeight: 600,
+        fontFamily: 'inherit'
+      },
+      padding: [0, 0, 20, 0] // 增加下方留白
     } : undefined,
 
-    // 提示框
+    // 提示框 (增加现代感阴影与圆角)
     tooltip: {
-      trigger: 'item'
+      trigger: 'item',
+      backgroundColor: 'rgba(255, 255, 255, 0.9)',
+      borderColor: colors.border,
+      textStyle: { color: colors.text },
+      padding: [8, 12],
+      borderRadius: 8,
+      extraCssText: 'box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);'
     },
 
     // 雷达图配置
     radar: {
       indicator: indicators,
       shape: 'polygon', // 多边形
-      splitNumber: 5, // 分割段数
+      splitNumber: 4, // 减少同心圈层数，更加干净
       axisName: {
-        color: colors.text,
-        fontSize: 12
+        color: colors.textMuted,
+        fontSize: 13,
+        fontWeight: 500,
+        fontFamily: 'inherit', // 继承外部系统字体
+        padding: [3, 5]
       },
       splitLine: {
         lineStyle: {
-          color: colors.border
+          color: colors.border,
+          width: 1,
+          type: 'dashed' // 改为虚线
         }
       },
       splitArea: {
-        areaStyle: {
-          color: [
-            'rgba(37, 99, 235, 0.05)',
-            'rgba(37, 99, 235, 0.1)'
-          ]
-        }
+        show: false // 关闭背景交替填充色，追求极简
       },
       axisLine: {
         lineStyle: {
-          color: colors.border
+          color: colors.border,
+          width: 1,
+          type: 'dashed' // 轴心连线也改用轻量虚线
         }
       }
     },
@@ -123,15 +133,21 @@ export function buildRadarConfig(data: RadarData): EChartsOption {
       data: [{
         value: values,
         name: data.title || '数据',
+        symbol: 'circle',
+        symbolSize: 6,
+        itemStyle: {
+          color: colors.primary,
+          borderColor: '#fff', // 节点呈现外围描边，内部空白的高级感
+          borderWidth: 2
+        },
         areaStyle: {
-          color: 'rgba(37, 99, 235, 0.2)'
+          color: colors.primary,
+          opacity: 0.15 // 动态透明度面填充，无需硬编码 RGBA
         },
         lineStyle: {
           color: colors.primary,
-          width: 2
-        },
-        itemStyle: {
-          color: colors.primary
+          width: 2,
+          type: 'solid'
         }
       }]
     }]
@@ -154,20 +170,24 @@ export function buildPowerConfig(data: PowerData): EChartsOption {
   );
 
   return {
-    // 网格配置
+    // 网格配置: 交给 ECharts 自动计算防止 Label 遮挡
     grid: {
-      left: '20%',
-      right: '10%',
-      top: '10%',
-      bottom: '10%'
+      left: '3%',
+      right: '8%',
+      top: '5%',
+      bottom: '3%',
+      containLabel: true
     },
 
     // 提示框
     tooltip: {
       trigger: 'axis',
-      axisPointer: {
-        type: 'shadow'
-      }
+      axisPointer: { type: 'shadow' },
+      backgroundColor: 'rgba(255, 255, 255, 0.9)',
+      borderColor: colors.border,
+      textStyle: { color: colors.text },
+      padding: [8, 12],
+      borderRadius: 8
     },
 
     // X 轴（数值轴）
@@ -175,12 +195,14 @@ export function buildPowerConfig(data: PowerData): EChartsOption {
       type: 'value',
       max: 100,
       axisLine: {
-        lineStyle: {
-          color: colors.border
-        }
+        show: false // 隐藏刻线
+      },
+      axisTick: {
+        show: false // 隐藏刻度小尾巴
       },
       axisLabel: {
-        color: colors.textMuted
+        color: colors.textMuted,
+        fontFamily: 'inherit'
       },
       splitLine: {
         lineStyle: {
@@ -195,13 +217,17 @@ export function buildPowerConfig(data: PowerData): EChartsOption {
       type: 'category',
       data: categories,
       axisLine: {
-        lineStyle: {
-          color: colors.border
-        }
+        show: false // 左侧大粗线隐藏
+      },
+      axisTick: {
+        show: false
       },
       axisLabel: {
         color: colors.text,
-        fontSize: 13
+        fontSize: 13,
+        fontWeight: 500,
+        fontFamily: 'inherit',
+        padding: [0, 8, 0, 0] // 增加与数据条距间的留白
       }
     },
 
@@ -209,17 +235,29 @@ export function buildPowerConfig(data: PowerData): EChartsOption {
     series: [{
       type: 'bar',
       data: values,
-      barWidth: '50%',
+      barWidth: 16, // 固定柱子粗细，使得布局统一
+      showBackground: true, // 显示柱槽背景
+      backgroundStyle: {
+        color: colors.border,
+        opacity: 0.2,
+        borderRadius: [0, 8, 8, 0] 
+      },
       itemStyle: {
         color: colors.primary,
-        borderRadius: [0, 4, 4, 0] // 右侧圆角
+        borderRadius: [0, 8, 8, 0], // 拉高圆角
+        shadowColor: 'rgba(0, 0, 0, 0.1)', // 微弱发光
+        shadowBlur: 4,
+        shadowOffsetY: 2
       },
       label: {
         show: true,
         position: 'right',
-        color: colors.textMuted,
+        color: colors.primary, // 标签文字跟随主题色
         fontSize: 12,
-        formatter: '{c}'
+        fontWeight: 600,
+        fontFamily: 'inherit',
+        formatter: '{c}',
+        distance: 8
       }
     }]
   };
