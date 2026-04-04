@@ -20,6 +20,11 @@
   --mw-text-muted: #49454F;         /* M3 On-surface-variant */
   --mw-border-color: #CAC4D0;       /* M3 Outline-variant */
   
+  /* Tooltip Colors */
+  --mw-tooltip-bg: rgba(255, 255, 255, 0.95);
+  --mw-tooltip-text: #1D1B20;
+  --mw-tooltip-border: #CAC4D0;
+  
   --mw-surface-container-lowest: #FFFFFF;
   --mw-surface-container-low: #F7F2FA;
   --mw-surface-container: #F3EDF7;
@@ -127,6 +132,11 @@
     --mw-text-color: #E6E0E9;
     --mw-text-muted: #CAC4D0;
     --mw-border-color: #49454F;
+    
+    /* Tooltip Colors */
+    --mw-tooltip-bg: rgba(33, 31, 38, 0.95);
+    --mw-tooltip-text: #E6E0E9;
+    --mw-tooltip-border: #49454F;
     
     --mw-surface-container-lowest: #0F0D13;
     --mw-surface-container-low: #1D1B20;

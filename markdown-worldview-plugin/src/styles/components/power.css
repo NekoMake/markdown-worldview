@@ -6,46 +6,59 @@
 
 /* Power 组件容器 */
 .mw-power {
-  border: 1px solid var(--mw-border-color);
-  border-radius: var(--mw-radius-md);
+  border: 1px solid var(--mw-outline-variant);
+  border-radius: var(--mw-radius-lg);
   overflow: hidden;
-  margin: var(--mw-space-lg) 0;
-  background: var(--mw-bg-color);
+  margin: var(--mw-spacing-lg) 0;
+  background: var(--mw-surface-container-low);
+  box-shadow: var(--mw-shadow-md);
+  transition: var(--mw-transition-base);
+}
+
+.mw-power:hover {
+  box-shadow: var(--mw-shadow-lg);
+  transform: translateY(-2px);
 }
 
 /* === 头部信息 === */
 .mw-power-header {
-  background: var(--mw-bg-color);
-  border-bottom: 1px solid var(--mw-border-color);
+  background: var(--mw-surface-container);
+  border-bottom: 1px solid var(--mw-outline-variant);
 }
 
 .mw-power-title-group {
   display: flex;
-  align-items: baseline;
-  gap: var(--mw-space-xl);
+  align-items: center;
+  gap: var(--mw-spacing-md);
   flex-wrap: wrap;
-  padding: var(--mw-space-md) var(--mw-space-lg);
-  border-bottom: 1px solid var(--mw-border-color);
-  line-height: 1.6;
+  padding: var(--mw-spacing-md) var(--mw-spacing-lg);
+  border-bottom: 1px solid var(--mw-outline-variant);
 }
 
-.mw-power-faction {
+h3.mw-power-faction {
   font-size: 1.5rem;
   font-weight: 600;
   margin: 0;
   color: var(--mw-text-color);
   font-family: var(--mw-font-sans);
-  line-height: 1.4;
+  line-height: 1.2;
 }
 
 .mw-power-status {
-  display: inline-block;
-  padding: 0.25rem 0.65rem;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 0.85rem;
   border-radius: var(--mw-radius-sm);
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   font-weight: 500;
   border: 1px solid currentColor;
-  line-height: 1.2;
+  line-height: 1;
+  height: fit-content;
+  transition: var(--mw-transition-fast);
+}
+
+.mw-power-status:hover {
+  filter: brightness(1.1);
 }
 
 /* 状态颜色映射 */
@@ -68,8 +81,8 @@
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: calc(var(--mw-space-xl) * 1.5);
-  padding: var(--mw-space-md) var(--mw-space-lg);
+  gap: var(--mw-spacing-xl);
+  padding: var(--mw-spacing-md) var(--mw-spacing-lg);
   line-height: 1.8;
 }
 
@@ -77,34 +90,41 @@
 .mw-power-extra {
   margin: 0;
   color: var(--mw-text-muted);
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: 500;
   display: inline-flex;
   align-items: center;
-  gap: var(--mw-space-xs);
-  line-height: 1.6;
+  gap: var(--mw-spacing-xs);
+  line-height: 1.5;
+}
+
+/* 为额外信息添加视觉分隔符 */
+.mw-power-extra::before {
+  content: '·';
+  margin: 0 var(--mw-spacing-sm);
+  color: var(--mw-outline);
 }
 
 /* === ECharts 图表容器 === */
 .mw-chart-power {
-  background: var(--mw-bg-color);
-  padding: var(--mw-space-md);
+  background: var(--mw-surface-container-low);
+  padding: var(--mw-spacing-md);
 }
 
 /* === 趋势指示器 === */
 .mw-power-trend {
   display: flex;
-  gap: var(--mw-space-lg);
-  padding: var(--mw-space-lg);
-  background: var(--mw-bg-color);
-  border-top: 1px solid var(--mw-border-color);
+  gap: var(--mw-spacing-md);
+  padding: var(--mw-spacing-md) var(--mw-spacing-lg);
+  background: var(--mw-surface-container);
+  border-top: 1px solid var(--mw-outline-variant);
   flex-wrap: wrap;
 }
 
 .mw-trend-item {
   display: flex;
   align-items: center;
-  gap: var(--mw-space-xs);
+  gap: var(--mw-spacing-xs);
   font-size: 0.9rem;
 }
 
@@ -121,6 +141,11 @@
   justify-content: center;
   width: 1.5rem;
   height: 1.5rem;
+  transition: var(--mw-transition-fast);
+}
+
+.mw-trend-item:hover .mw-trend-icon {
+  transform: scale(1.2);
 }
 
 /* 趋势图标颜色 */
@@ -140,16 +165,20 @@
 @media (max-width: 640px) {
   .mw-power-title-group,
   .mw-power-meta-group {
-    padding: var(--mw-space-md);
+    padding: var(--mw-spacing-md);
   }
   
-  .mw-power-faction {
+  h3.mw-power-faction {
     font-size: 1.25rem;
   }
   
+  .mw-power-meta-group {
+    gap: var(--mw-spacing-md);
+  }
+  
   .mw-power-trend {
-    gap: var(--mw-space-md);
-    padding: var(--mw-space-md);
+    gap: var(--mw-spacing-md);
+    padding: var(--mw-spacing-md);
   }
   
   .mw-trend-item {
@@ -160,21 +189,21 @@
 /* 深色模式适配 */
 @media (prefers-color-scheme: dark) {
   .mw-power {
-    background: var(--mw-bg-color);
-    border-color: var(--mw-border-color);
+    background: var(--mw-surface-container-low);
+    border-color: var(--mw-outline-variant);
   }
   
   .mw-power-header {
-    background: var(--mw-bg-color);
-    border-bottom-color: var(--mw-border-color);
+    background: var(--mw-surface-container);
+    border-bottom-color: var(--mw-outline-variant);
   }
   
   .mw-chart-power {
-    background: var(--mw-bg-color);
+    background: var(--mw-surface-container-low);
   }
   
   .mw-power-trend {
-    background: var(--mw-bg-color);
-    border-top-color: var(--mw-border-color);
+    background: var(--mw-surface-container);
+    border-top-color: var(--mw-outline-variant);
   }
 }

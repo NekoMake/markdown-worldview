@@ -50,7 +50,7 @@ export default defineConfig({
           ]
         },
         {
-          text: '图表组件（开发中）',
+          text: '图表组件',
           collapsed: true,
           items: [
             { text: 'Radar 雷达图', link: '/components/radar' },

@@ -13,6 +13,7 @@ import type { PluginOptions } from '../adapters/navigation';
  */
 export interface RadarData {
   title?: string;                    // 可选：标题
+  description?: string;              // 可选：副标题/描述
   data: Record<string, number>;      // 必填：雷达图数据（维度名: 数值）
 }
 
@@ -46,12 +47,14 @@ export function renderRadar(content: string, options: PluginOptions): string {
       }
     }
     
-    // 安全处理标题
+    // 安全处理标题和副标题
     const title = data.title ? escapeHtml(data.title) : '';
+    const description = data.description ? escapeHtml(data.description) : '';
     
     // 将配置序列化为 JSON（供客户端使用）
     const configJson = JSON.stringify({
       title,
+      description,
       data: data.data
     });
     
@@ -68,7 +71,7 @@ export function renderRadar(content: string, options: PluginOptions): string {
   class="mw-radar mw-chart mw-chart-radar"
   data-mw-chart-type="radar"
   data-mw-chart-config="${configJsonEscaped}"
-  style="height: 400px; width: 100%;"
+  style="height: 350px; width: 100%;"
 >
   <div class="mw-chart-loading">加载中...</div>
 </div>`.trim();

@@ -16,7 +16,6 @@
   margin: var(--mw-spacing-lg) 0;
   box-shadow: none;
   position: relative;
-  overflow: hidden;
   transition: 
     box-shadow var(--mw-transition-base),
     transform var(--mw-transition-base);
@@ -68,16 +67,17 @@
 
 /* ========== Avatar - M3 圆角方形 ========== */
 .mw-card-avatar {
-  width: 100%;
-  max-width: var(--mw-card-avatar-size);
-  height: auto;
-  aspect-ratio: 1;
-  object-fit: cover;
+  width: var(--mw-card-avatar-size); /* 固定宽度 */
+  height: var(--mw-card-avatar-size); /* 固定高度 */
+  min-width: var(--mw-card-avatar-size); /* 防止收缩 */
+  min-height: var(--mw-card-avatar-size); /* 防止收缩 */
+  object-fit: cover; /* 图片过大时裁剪 */
   border-radius: 20px;
   border: none;
   margin: 0 auto;
   background: var(--mw-surface-container-highest);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0; /* 防止在 flex 布局中被压缩 */
 }
 
 /* ========== Card Body ========== */
@@ -86,6 +86,33 @@
   flex-direction: column;
   gap: var(--mw-spacing-sm);
   flex: 1;
+  min-height: 0; /* 允许在 flex 容器中收缩 */
+}
+
+/* 美化滚动条 - Webkit 浏览器 */
+.mw-card-desc::-webkit-scrollbar {
+  width: 6px;
+}
+
+.mw-card-desc::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 3px;
+}
+
+.mw-card-desc::-webkit-scrollbar-thumb {
+  background: var(--mw-outline-variant);
+  border-radius: 3px;
+  transition: background var(--mw-transition-fast);
+}
+
+.mw-card-desc::-webkit-scrollbar-thumb:hover {
+  background: var(--mw-outline);
+}
+
+/* Firefox 滚动条样式 */
+.mw-card-desc {
+  scrollbar-width: thin;
+  scrollbar-color: var(--mw-outline-variant) transparent;
 }
 
 /* ========== Name (Title) - M3 Typography ========== */
@@ -106,6 +133,12 @@
   color: var(--mw-text-muted);
   margin: 0;
   text-align: center;
+  word-wrap: break-word; /* 长单词自动换行 */
+  overflow-wrap: break-word; /* 兼容性更好的换行 */
+  max-height: 200px; /* 固定最大高度 */
+  overflow-y: auto; /* 显示垂直滚动条 */
+  overflow-x: hidden; /* 隐藏横向滚动条 */
+  padding-right: 8px; /* 为滚动条留出空间 */
 }
 
 /* ========== Dictum (Quote) - M3 风格 ========== */
@@ -166,11 +199,17 @@
   
   .mw-card-avatar {
     margin: 0;
-    max-width: calc(var(--mw-card-avatar-size) * 1.25);
+    width: calc(var(--mw-card-avatar-size) * 1.25); /* 固定宽度 */
+    height: calc(var(--mw-card-avatar-size) * 1.25); /* 固定高度 */
+    min-width: calc(var(--mw-card-avatar-size) * 1.25);
+    min-height: calc(var(--mw-card-avatar-size) * 1.25);
     flex-shrink: 0;
   }
   
-  .mw-card-name,
+  .mw-card-name{
+    font-size: 1.75rem;
+    text-align: left;
+  }
   .mw-card-desc {
     text-align: left;
   }
@@ -183,7 +222,10 @@
 /* Large desktop: Larger avatar */
 @media (min-width: 1024px) {
   .mw-card-avatar {
-    max-width: calc(var(--mw-card-avatar-size) * 1.5);
+    width: calc(var(--mw-card-avatar-size) * 1.5); /* 固定宽度 */
+    height: calc(var(--mw-card-avatar-size) * 1.5); /* 固定高度 */
+    min-width: calc(var(--mw-card-avatar-size) * 1.5);
+    min-height: calc(var(--mw-card-avatar-size) * 1.5);
   }
   
   .mw-card-name {

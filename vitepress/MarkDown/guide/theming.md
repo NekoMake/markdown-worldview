@@ -42,6 +42,9 @@
 | `--mw-bg-color` | 背景色 | 白色 |
 | `--mw-text-color` | 文字色 | 深灰 |
 | `--mw-border-color` | 边框色 | 浅灰 |
+| `--mw-tooltip-bg` | 图表提示框背景色 | 白色半透明 |
+| `--mw-tooltip-text` | 图表提示框文字色 | 深灰 |
+| `--mw-tooltip-border` | 图表提示框边框色 | 浅灰 |
 | `--mw-pos-color` | 正面元素（盟友、增益、↑） | 绿色 |
 | `--mw-neg-color` | 负面元素（敌人、减益、↓） | 红色 |
 | `--mw-neu-color` | 中性元素 | 灰色 |
@@ -163,6 +166,29 @@
     --mw-primary-color: #60a5fa;
     --mw-bg-color: #1f2937;
     --mw-text-color: #f3f4f6;
+    /* 图表 Tooltip 也需要适配深色模式 */
+    --mw-tooltip-bg: rgba(31, 41, 55, 0.95);
+    --mw-tooltip-text: #f3f4f6;
+    --mw-tooltip-border: #4b5563;
+  }
+}
+```
+
+**自定义图表 Tooltip**
+```css
+:root {
+  /* 浅色主题：温暖的米色 Tooltip */
+  --mw-tooltip-bg: rgba(255, 248, 240, 0.95);
+  --mw-tooltip-text: #4a3f35;
+  --mw-tooltip-border: #d4a574;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 深色主题：深蓝色 Tooltip */
+    --mw-tooltip-bg: rgba(30, 41, 59, 0.95);
+    --mw-tooltip-text: #e0e7ff;
+    --mw-tooltip-border: #4f46e5;
   }
 }
 ```
