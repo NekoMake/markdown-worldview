@@ -6,15 +6,15 @@
 
 import './styles/index.css';
 import type MarkdownIt from 'markdown-it';
-import type { MarkdownWorldviewOptions } from './adapters/navigation';
-import { mergeOptions } from './adapters/navigation';
+import type { PluginOptions } from './adapters/navigation';
+import { mergePluginOptions } from './adapters/navigation';
 import { componentRegistry } from './components/registry';
 
 /**
  * Markdown-it 插件函数
  * 
  * @param md - MarkdownIt 实例
- * @param userOptions - 插件选项
+ * @param userOptions - 插件选项（服务端配置）
  * 
  * @example
  * ```typescript
@@ -23,17 +23,15 @@ import { componentRegistry } from './components/registry';
  * 
  * const md = new MarkdownIt();
  * md.use(markdownWorldviewPlugin, {
- *   onNavigate: (event) => {
- *     console.log('导航到:', event.path);
- *   }
+ *   debug: true  // 服务端只需要 debug 选项
  * });
  * ```
  */
 export function markdownWorldviewPlugin(
   md: MarkdownIt,
-  userOptions?: MarkdownWorldviewOptions
+  userOptions?: PluginOptions
 ): void {
-  const options = mergeOptions(userOptions);
+  const options = mergePluginOptions(userOptions);
 
   // 获取所有已注册的组件名称
   const componentNames = componentRegistry.getComponentNames();
@@ -67,7 +65,7 @@ export function markdownWorldviewPlugin(
  * 导出所有类型和工具函数
  */
 export type {
-  MarkdownWorldviewOptions,
+  PluginOptions,
   NavigationEvent,
   NavigateFunction,
 } from './adapters/navigation';

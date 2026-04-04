@@ -5,7 +5,7 @@
  * 提供统一的接口。
  */
 
-import type { MarkdownWorldviewOptions } from '../adapters/navigation';
+import type { PluginOptions } from '../adapters/navigation';
 import { parseYAML, YAMLParseError } from '../parser/yaml-parser';
 
 // Phase 3 组件（纯 CSS）
@@ -22,7 +22,7 @@ import { renderPower } from './power';
  */
 export type ComponentRenderer = (
   content: string,
-  options: Required<MarkdownWorldviewOptions>
+  options: Required<PluginOptions>
 ) => string;
 
 /**
@@ -58,7 +58,7 @@ class ComponentRegistry {
   render(
     name: string,
     content: string,
-    options: Required<MarkdownWorldviewOptions>
+    options: Required<PluginOptions>
   ): string {
     const renderer = this.get(name);
     

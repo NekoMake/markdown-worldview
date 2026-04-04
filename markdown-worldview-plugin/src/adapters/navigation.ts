@@ -33,29 +33,12 @@ export interface NavigationEvent {
 export type NavigateFunction = (event: NavigationEvent) => void;
 
 /**
- * 插件选项接口
+ * 服务端插件配置接口
+ * 
+ * 用于 markdown-it 插件（服务端渲染）。
+ * 服务端只负责将 YAML 渲染成 HTML，不处理用户交互。
  */
-export interface MarkdownWorldviewOptions {
-  /**
-   * 导航回调函数
-   * 
-   * 当用户点击带有链接的组件时，将调用此函数。
-   * 宿主应用程序应实现此函数以处理页面导航。
-   * 
-   * @example
-   * // 在 Obsidian 中
-   * onNavigate: (event) => {
-   *   this.app.workspace.openLinkText(event.path, '', false);
-   * }
-   * 
-   * @example
-   * // 在 VitePress 中使用 Vue Router
-   * onNavigate: (event) => {
-   *   router.push(event.path);
-   * }
-   */
-  onNavigate?: NavigateFunction;
-
+export interface PluginOptions {
   /**
    * 启用调试模式（在控制台输出警告和错误）
    * @default false
@@ -70,15 +53,9 @@ export interface MarkdownWorldviewOptions {
 }
 
 /**
- * 默认选项
+ * 默认插件选项
  */
-export const defaultOptions: Required<MarkdownWorldviewOptions> = {
-  onNavigate: (event) => {
-    console.warn(
-      'MarkdownWorldview: 未提供 onNavigate 函数。' +
-      `无法导航到: ${event.path}`
-    );
-  },
+export const defaultPluginOptions: Required<PluginOptions> = {
   debug: false,
   classPrefix: 'mw',
 };
@@ -86,11 +63,11 @@ export const defaultOptions: Required<MarkdownWorldviewOptions> = {
 /**
  * 合并用户选项与默认选项
  */
-export function mergeOptions(
-  userOptions?: MarkdownWorldviewOptions
-): Required<MarkdownWorldviewOptions> {
+export function mergePluginOptions(
+  userOptions?: PluginOptions
+): Required<PluginOptions> {
   return {
-    ...defaultOptions,
+    ...defaultPluginOptions,
     ...userOptions,
   };
 }

@@ -12,15 +12,8 @@ export default defineConfig({
   markdown: {
     config: (md) => {
       md.use(markdownWorldviewPlugin, {
-        debug: true,  // 启用调试模式
-        onNavigate: (event) => {
-          // VitePress 中的链接跳转处理
-          if (typeof window !== 'undefined') {
-            // 客户端端跳转
-            const link = event.path.startsWith('/') ? event.path : `/${event.path}`
-            window.location.href = link
-          }
-        }
+        debug: true  // 服务端只需要 debug 选项
+        // 不需要 onNavigate - 导航处理在客户端完成
       })
     }
   },

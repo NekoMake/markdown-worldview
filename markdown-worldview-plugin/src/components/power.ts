@@ -8,7 +8,7 @@
  */
 
 import { parseYAML, validateRequiredFields, escapeHtml } from '../parser/yaml-parser';
-import type { MarkdownWorldviewOptions } from '../adapters/navigation';
+import type { PluginOptions } from '../adapters/navigation';
 
 /**
  * Power 组件数据接口
@@ -50,7 +50,7 @@ const TREND_ICONS: Record<string, string> = {
  * @param options - 插件选项
  * @returns HTML 字符串
  */
-export function renderPower(content: string, options: MarkdownWorldviewOptions): string {
+export function renderPower(content: string, options: PluginOptions): string {
   try {
     // 解析 YAML
     const data = parseYAML<PowerData>(content, 'power');

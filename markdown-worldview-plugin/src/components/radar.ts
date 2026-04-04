@@ -6,7 +6,7 @@
  */
 
 import { parseYAML, validateRequiredFields, escapeHtml } from '../parser/yaml-parser';
-import type { MarkdownWorldviewOptions } from '../adapters/navigation';
+import type { PluginOptions } from '../adapters/navigation';
 
 /**
  * Radar 组件数据接口
@@ -23,7 +23,7 @@ export interface RadarData {
  * @param options - 插件选项
  * @returns HTML 字符串
  */
-export function renderRadar(content: string, options: MarkdownWorldviewOptions): string {
+export function renderRadar(content: string, options: PluginOptions): string {
   try {
     // 解析 YAML
     const data = parseYAML<RadarData>(content, 'radar');

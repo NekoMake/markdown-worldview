@@ -1,35 +1,28 @@
 import { describe, it, expect } from 'vitest';
-import { mergeOptions, createNavigationHandler } from '../src/adapters/navigation';
+import { mergePluginOptions, createNavigationHandler } from '../src/adapters/navigation';
 
 describe('导航适配器', () => {
-  describe('mergeOptions', () => {
+  describe('mergePluginOptions', () => {
     it('未提供用户选项时应使用默认选项', () => {
-      const options = mergeOptions();
+      const options = mergePluginOptions();
       expect(options.debug).toBe(false);
       expect(options.classPrefix).toBe('mw');
-      expect(typeof options.onNavigate).toBe('function');
     });
 
     it('应该将用户选项与默认选项合并', () => {
-      const userNavigate = () => {};
-      const options = mergeOptions({
+      const options = mergePluginOptions({
         debug: true,
-        onNavigate: userNavigate,
       });
       expect(options.debug).toBe(true);
-      expect(options.onNavigate).toBe(userNavigate);
       expect(options.classPrefix).toBe('mw'); // 默认值
     });
 
     it('应该覆盖所有选项', () => {
-      const userNavigate = () => {};
-      const options = mergeOptions({
+      const options = mergePluginOptions({
         debug: true,
-        onNavigate: userNavigate,
         classPrefix: 'custom',
       });
       expect(options.debug).toBe(true);
-      expect(options.onNavigate).toBe(userNavigate);
       expect(options.classPrefix).toBe('custom');
     });
   });

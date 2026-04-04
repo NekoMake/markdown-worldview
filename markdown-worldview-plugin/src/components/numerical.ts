@@ -5,7 +5,7 @@
  */
 
 import { parseYAML, validateRequiredFields, escapeHtml, validateFieldType } from '../parser/yaml-parser';
-import type { MarkdownWorldviewOptions } from '../adapters/navigation';
+import type { PluginOptions } from '../adapters/navigation';
 
 /**
  * Numerical 单项数据接口
@@ -92,7 +92,7 @@ function renderNumericalItem(item: NumericalItem, hasProgress: boolean): string 
  * @param options - 插件选项
  * @returns HTML 字符串
  */
-export function renderNumerical(content: string, options: MarkdownWorldviewOptions): string {
+export function renderNumerical(content: string, options: PluginOptions): string {
   try {
     // 解析 YAML
     const data = parseYAML<NumericalData>(content, 'numerical');

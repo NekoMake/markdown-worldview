@@ -1,61 +1,72 @@
 /**
  * Markdown-Worldview 客户端初始化函数
  * 
- * 提供统一的客户端初始化接口，只负责需要 DOM API 的功能：
+ * 提供统一的客户端初始化接口，负责需要 DOM API 的功能：
  * - 图表初始化（ECharts）
+ * - 导航事件处理（点击跳转）
  * - 响应式调整
  * - 未来可能的客户端增强功能
- * 
- * 注意：导航处理（onNavigate）应该在服务端配置时设置，不是这个函数的责任。
  */
 
 import { echartsManager } from './echarts-manager';
+import { setupNavigationHandlers } from './navigation';
+import type { NavigateFunction } from '../adapters/navigation';
 
 /**
- * 初始化选项
+ * 客户端初始化选项
+ * 
+ * 用于浏览器端的功能初始化（图表、导航等）
  */
-export interface InitOptions {
+export interface ClientInitOptions {
   /** 调试模式（显示详细日志） */
   debug?: boolean;
+  
+  /** 
+   * 导航回调函数
+   * 
+   * 当用户点击带有链接的组件时调用。
+   * 这是客户端唯一需要配置导航的地方。
+   * 
+   * @example
+   * // VitePress 中
+   * onNavigate: (event) => {
+   *   router.go(event.path)
+   * }
+   * 
+   * @example
+   * // 普通网页中
+   * onNavigate: (event) => {
+   *   window.location.href = event.path
+   * }
+   */
+  onNavigate?: NavigateFunction;
 }
 
 /**
  * 初始化 Markdown-Worldview 客户端功能
  * 
- * 这个函数只负责初始化需要客户端 DOM API 的功能：
+ * 这个函数负责初始化所有需要客户端 DOM API 的功能：
  * 1. 扫描页面并初始化所有图表（ECharts）
- * 2. 自动处理响应式调整（ResizeObserver）
- * 3. 未来可能的客户端增强功能（动画、懒加载等）
- * 
- * **重要**：导航处理（onNavigate）应该在 markdown-it 插件配置时设置，
- * 而不是在这里配置。客户端的 `initMarkdownWorldview()` 只负责图表等
- * 需要浏览器 API 的功能。
+ * 2. 设置导航事件处理器（处理组件点击跳转）
+ * 3. 自动处理响应式调整（ResizeObserver）
+ * 4. 未来可能的客户端增强功能（动画、懒加载等）
  * 
  * @param options - 初始化选项
  * @returns 清理函数，用于销毁所有图表实例和清理资源
  * 
  * @example
  * ```typescript
- * // 在 VitePress 主题的 enhanceApp 中调用
+ * // 在 VitePress 主题的 Layout.vue 中调用
  * import { initMarkdownWorldview } from 'markdown-worldview/client';
+ * import { useRouter } from 'vitepress';
  * 
- * export default {
- *   async enhanceApp({ app, router }) {
- *     if (typeof window !== 'undefined') {
- *       const cleanup = await initMarkdownWorldview({ debug: true });
- *       
- *       // SPA 路由切换时清理旧图表
- *       router.onBeforeRouteChange = () => {
- *         cleanup();
- *       };
- *       
- *       // 路由切换后重新初始化
- *       router.onAfterRouteChanged = async () => {
- *         await initMarkdownWorldview({ debug: true });
- *       };
- *     }
+ * const router = useRouter();
+ * const cleanup = await initMarkdownWorldview({ 
+ *   debug: true,
+ *   onNavigate: (event) => {
+ *     router.go(event.path)
  *   }
- * }
+ * });
  * ```
  * 
  * @example
@@ -63,48 +74,69 @@ export interface InitOptions {
  * // 在普通网页中使用
  * import { initMarkdownWorldview } from 'markdown-worldview/client';
  * 
- * // 页面加载后初始化
  * document.addEventListener('DOMContentLoaded', async () => {
- *   const cleanup = await initMarkdownWorldview({ debug: true });
+ *   const cleanup = await initMarkdownWorldview({ 
+ *     debug: true,
+ *     onNavigate: (event) => {
+ *       window.location.href = event.path
+ *     }
+ *   });
  *   
- *   // 页面卸载时清理（可选）
  *   window.addEventListener('beforeunload', cleanup);
  * });
  * ```
  */
-export async function initMarkdownWorldview(options?: InitOptions): Promise<() => void> {
-  const { debug = false } = options || {};
+export async function initMarkdownWorldview(options?: ClientInitOptions): Promise<() => void> {
+  const { debug = false, onNavigate } = options || {};
   
-  console.log('[MarkdownWorldview] 🚀 开始初始化 Markdown-Worldview 客户端', options);
-  console.log('[MarkdownWorldview] 当前 window 对象:', typeof window !== 'undefined' ? '存在' : '不存在');
-  console.log('[MarkdownWorldview] 当前 document 对象:', typeof document !== 'undefined' ? '存在' : '不存在');
+  if (debug) {
+    console.log('[MarkdownWorldview] 🚀 初始化客户端功能');
+  }
   
   try {
-    // 初始化所有图表
-    console.log('[MarkdownWorldview] 调用 echartsManager.initializePageCharts()...');
+    // 1. 初始化所有图表
     await echartsManager.initializePageCharts();
     
     if (debug) {
-      console.log('[MarkdownWorldview] ✅ Charts initialized successfully');
+      console.log('[MarkdownWorldview] ✅ 图表初始化成功');
     }
   } catch (error) {
-    console.error('[MarkdownWorldview] ❌ Failed to initialize charts:', error);
-    console.error('[MarkdownWorldview] 错误堆栈:', error instanceof Error ? error.stack : error);
-    if (debug) {
-      console.error('[MarkdownWorldview] Debug mode - 详细错误信息:', error);
+    console.error('[MarkdownWorldview] ❌ 图表初始化失败:', error);
+    if (debug && error instanceof Error) {
+      console.error('[MarkdownWorldview] 错误堆栈:', error.stack);
     }
-    // 即使初始化失败，也返回清理函数（防止内存泄漏）
   }
   
-  // 返回清理函数
+  // 2. 设置导航处理器（如果提供了 onNavigate）
+  let cleanupNav: (() => void) | null = null;
+  if (onNavigate) {
+    if (debug) {
+      console.log('[MarkdownWorldview] ⚙️ 设置导航事件处理器');
+    }
+    cleanupNav = setupNavigationHandlers(document.body, onNavigate, {
+      preventDefault: true,
+      debug,
+    });
+  } else if (debug) {
+    console.warn('[MarkdownWorldview] ⚠️ 未提供 onNavigate，组件链接将无法跳转');
+  }
+  
+  // 3. 返回清理函数
   return () => {
     if (debug) {
-      console.log('[MarkdownWorldview] Cleaning up resources...');
+      console.log('[MarkdownWorldview] 🧹 清理资源');
     }
     echartsManager.destroyAll();
+    if (cleanupNav) {
+      cleanupNav();
+    }
   };
 }
 
 // 重新导出其他客户端工具（供高级用户使用）
 export { echartsManager } from './echarts-manager';
 export { buildRadarConfig, buildPowerConfig } from './chart-configs';
+export { setupNavigationHandlers, createAutoNavigationHandler } from './navigation';
+
+// 重新导出类型（供用户使用）
+export type { NavigateFunction, NavigationEvent } from '../adapters/navigation';

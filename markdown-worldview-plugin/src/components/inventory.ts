@@ -5,7 +5,7 @@
  */
 
 import { parseYAML, validateRequiredFields, escapeHtml, sanitizePath, validateFieldType } from '../parser/yaml-parser';
-import type { MarkdownWorldviewOptions } from '../adapters/navigation';
+import type { PluginOptions } from '../adapters/navigation';
 
 /**
  * 物品数据接口
@@ -35,7 +35,7 @@ export interface InventoryData {
  * @param options - 插件选项
  * @returns HTML 字符串
  */
-export function renderInventory(content: string, options: MarkdownWorldviewOptions): string {
+export function renderInventory(content: string, options: PluginOptions): string {
   try {
     // 解析 YAML
     const data = parseYAML<InventoryData>(content, 'inventory');

@@ -5,7 +5,7 @@
  */
 
 import { parseYAML, validateRequiredFields, escapeHtml, sanitizePath } from '../parser/yaml-parser';
-import type { MarkdownWorldviewOptions } from '../adapters/navigation';
+import type { PluginOptions } from '../adapters/navigation';
 
 /**
  * Card 组件数据接口
@@ -26,7 +26,7 @@ export interface CardData {
  * @param options - 插件选项
  * @returns HTML 字符串
  */
-export function renderCard(content: string, options: MarkdownWorldviewOptions): string {
+export function renderCard(content: string, options: PluginOptions): string {
   try {
     // 解析 YAML
     const data = parseYAML<CardData>(content, 'card');

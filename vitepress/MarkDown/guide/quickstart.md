@@ -15,19 +15,28 @@ npm install markdown-worldview
 ```javascript
 import MarkdownIt from 'markdown-it'
 import { markdownWorldviewPlugin } from 'markdown-worldview'
+import { initMarkdownWorldview } from 'markdown-worldview/client'
 import 'markdown-worldview/style.css'
 
 const md = new MarkdownIt()
 
+// 服务端：配置插件（只负责渲染 HTML）
 md.use(markdownWorldviewPlugin, {
+  debug: true  // 可选：启用调试模式
+})
+
+// 渲染 Markdown 为 HTML
+const html = md.render('你的 markdown 内容')
+
+// 客户端：初始化图表和导航（在浏览器中执行）
+await initMarkdownWorldview({
+  debug: true,
   onNavigate: (event) => {
     console.log('导航到:', event.path)
     // 在这里实现你的导航逻辑
     // 例如: router.push(event.path)
   }
 })
-
-const html = md.render('你的 markdown 内容')
 ```
 
 ### 在 VitePress 中使用
@@ -42,13 +51,8 @@ export default defineConfig({
   markdown: {
     config: (md) => {
       md.use(markdownWorldviewPlugin, {
-        debug: true,
-        onNavigate: (event) => {
-          // VitePress 导航逻辑
-          if (typeof window !== 'undefined') {
-            window.location.href = event.path
-          }
-        }
+        debug: true  // 服务端只需要配置 debug 选项
+        // ❌ 不需要 onNavigate - 导航应该在客户端处理
       })
     }
   }
@@ -59,19 +63,30 @@ export default defineConfig({
 
 ```vue
 <script setup lang="ts">
-import { onMounted, onUnmounted, watch } from 'vue'
-import { useRoute } from 'vitepress'
+import { onMounted, onUnmounted, watch, nextTick } from 'vue'
+import { useRoute, useRouter } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import { initMarkdownWorldview } from 'markdown-worldview/client'
 
 const { Layout } = DefaultTheme
 const route = useRoute()
+const router = useRouter()
 
 let cleanup: (() => void) | null = null
 
-onMounted(async () => {
-  cleanup = await initMarkdownWorldview({ debug: true })
-})
+// 初始化函数
+const init = async () => {
+  await nextTick()
+  cleanup = await initMarkdownWorldview({ 
+    debug: true,
+    // ✅ 客户端导航处理 - 这是唯一需要配置 onNavigate 的地方
+    onNavigate: (event) => {
+      router.go(event.path)
+    }
+  })
+}
+
+onMounted(init)
 
 onUnmounted(() => {
   if (cleanup) cleanup()
@@ -79,7 +94,7 @@ onUnmounted(() => {
 
 watch(() => route.path, async () => {
   if (cleanup) cleanup()
-  cleanup = await initMarkdownWorldview({ debug: true })
+  await init()
 })
 </script>
 
